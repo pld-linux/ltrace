@@ -5,16 +5,17 @@ Summary(pt_BR):	Mostra informaГУes sobre as chamadas Ю funГУes de bibliotecas em
 Summary(ru):	Выводит трассу библиотечных и системных вызовов программы
 Summary(uk):	Вида╓ трасу б╕бл╕отечних та системних виклик╕в програми
 Name:		ltrace
-Version:	0.3.23
-Release:	1
+Version:	0.3.31
+Release:	2
 License:	GPL
 Group:		Development/Debuggers
 Source0:	ftp://ftp.debian.org/debian/pool/main/l/%{name}/%{name}_%{version}.tar.gz
-Patch0:		%{name}-nsyscals0.patch
-Patch1:		%{name}-Makefile.in.patch
+# Source0-md5:	7bef142861646ad33dc749fbaf96761e
+Patch0:		%{name}-Makefile.in.patch
+URL:		http://packages.debian.org/unstable/utils/ltrace.html
 BuildRequires:	autoconf
 BuildRequires:	automake
-ExclusiveArch:	%{ix86} m68k armv4b armv4l
+ExclusiveArch:	%{ix86} m68k armv4b armv4l ppc
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -66,27 +67,25 @@ Ltrace - це програма, яка запуска╓ вказану програму та перехвачу╓ й
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
-aclocal
-autoconf
+%{__aclocal}
+%{__autoconf}
 %configure
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} DESTDIR=$RPM_BUILD_ROOT install
-
-gzip -9nf README TODO BUGS
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc {README,TODO,BUGS}.gz
+%doc README TODO BUGS
 %config %verify(not size mtime md5) %{_sysconfdir}/ltrace.conf
 %attr(755,root,root) %{_bindir}/ltrace
 
