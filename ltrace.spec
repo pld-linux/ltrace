@@ -10,8 +10,7 @@ Release:	3
 License:	GPL
 Group:		Development/Debuggers
 Source0:	ftp://ftp.debian.org/debian/pool/main/l/%{name}/%{name}_%{version}.tar.gz
-Patch0:		%{name}-nsyscals0.patch
-Patch1:		%{name}-Makefile.in.patch
+Patch0:		%{name}-Makefile.in.patch
 URL:		http://packages.debian.org/unstable/utils/ltrace.html
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -67,7 +66,6 @@ Ltrace - це програма, яка запуска╓ вказану програму та перехвачу╓ й
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{__aclocal}
