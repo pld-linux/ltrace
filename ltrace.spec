@@ -1,15 +1,15 @@
-Summary: 	Tracks runtime library calls from dynamically linked executables.
-Summary(pl): 	¦ledzenie odwo³añ do bibliotek w plikach linkowanych dynamicznie.
-Name: 		ltrace
-Version: 	0.3.8
-Release: 	1
-Source: 	ftp://ftp.debian.org/debian/dists/unstable/main/source/utils/ltrace_%{version}.tar.gz
-Copyright: 	GPL
-Group: 		Development/Debuggers
+Summary:	Tracks runtime library calls from dynamically linked executables.
+Summary(pl):	¦ledzenie odwo³añ do bibliotek w plikach linkowanych dynamicznie.
+Name:		ltrace
+Version:	0.3.8
+Release:	1
+Copyright:	GPL
+Group:		Development/Debuggers
 Group(pl):	Programowanie/Odpluskwiacze
+Source:		ftp://ftp.debian.org/debian/dists/unstable/main/source/utils/%{name}_%{version}.tar.gz
+ExclusiveArch:	%{ix86} m68k armv4b armv4l
 BuildRequires:	binutils-static
-ExclusiveArch: 	%{ix86} m68k armv4b armv4l
-BuildRoot: 	/var/tmp/%{name}-%{version}-root
+BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
 Ltrace is a debugging program which runs a specified command until the
