@@ -10,6 +10,7 @@ Release:	1
 License:	GPL
 Group:		Development/Debuggers
 Source0:	ftp://ftp.debian.org/debian/pool/main/l/%{name}/%{name}_%{version}.tar.gz
+# Source0-md5:	7bef142861646ad33dc749fbaf96761e
 Patch0:		%{name}-Makefile.in.patch
 URL:		http://packages.debian.org/unstable/utils/ltrace.html
 BuildRequires:	autoconf
