@@ -1,14 +1,12 @@
 Summary: Tracks runtime library calls from dynamically linked executables.
+Summary(pl): ¦ledzenie odwo³añ do bibliotek w plikach linkowanych dynamicznie.
 Name: ltrace
 Version: 0.3.8
 Release: 1
 Source: ftp://ftp.debian.org/debian/dists/unstable/main/source/utils/ltrace_%{version}.tar.gz
 Copyright: GPL
 Group: Development/Debuggers
-ExclusiveArch: i386
-ExclusiveArch: i486
-ExclusiveArch: i586
-ExclusiveArch: i686
+ExclusiveArch: i386 i486 i586 i686
 Prefix: %{_prefix}
 BuildRoot: /var/tmp/%{name}-root
 
@@ -21,6 +19,15 @@ and print system calls executed by the process.
 
 You should install ltrace if you need a sysadmin tool for tracking the
 execution of processes.
+
+%description -l pl
+Ltrace jest programem wspomagaj±cym debugowanie programów. Ltrace uruchamia
+dane polecenie przechwytuj±c i zapisuj±c odwo³ania do bibliotek linkowanych
+dynamicznie oraz sygna³y otrzymane przez program. Ltrace potrafi tak¿e
+przechwytywaæ i wy¶wietlaæ odwo³ania systemowe wykonywane przez program.
+
+Je¶li potrzebujesz narzêdzia administracyjnego, przydatnego do ¶ledzenia
+dzia³ania programów, powiniene¶ zainstalowaæ ltrace.
 
 %prep
 %setup -q
