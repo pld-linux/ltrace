@@ -5,12 +5,12 @@ Summary(pt_BR):	Mostra informaГУes sobre as chamadas Ю funГУes de bibliotecas em
 Summary(ru):	Выводит трассу библиотечных и системных вызовов программы
 Summary(uk):	Вида╓ трасу б╕бл╕отечних та системних виклик╕в програми
 Name:		ltrace
-Version:	0.3.35.1
+Version:	0.3.36
 Release:	1
 License:	GPL
 Group:		Development/Debuggers
-Source0:	ftp://ftp.debian.org/debian/pool/main/l/ltrace/%{name}_%{version}.tar.gz
-# Source0-md5:	560d8d64dea0907c161127eab3a66a9d
+Source0:	ftp://ftp.debian.org/debian/pool/main/l/ltrace/%{name}_%{version}.orig.tar.gz
+# Source0-md5:	674c9a7ddbe2a4ec10564dbb09b2261a
 Patch0:		%{name}-Makefile.in.patch
 URL:		http://packages.debian.org/unstable/utils/ltrace.html
 BuildRequires:	autoconf
@@ -70,10 +70,6 @@ Ltrace - це програма, яка запуска╓ вказану програму та перехвачу╓ й
 %prep
 %setup -q
 %patch0 -p1
-patch -s -p1 < debian/patches/0064bit.dpatch
-patch -s -p1 < debian/patches/01elf-rewrite.dpatch
-patch -s -p1 < debian/patches/02demangle.dpatch
-patch -s -p1 < debian/patches/03syscallent-update.dpatch
 
 %build
 cp -f /usr/share/automake/config.* .
@@ -93,7 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README TODO BUGS
+%doc BUGS ChangeLog README TODO
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/ltrace.conf
 %attr(755,root,root) %{_bindir}/ltrace
 %{_mandir}/man1/*
