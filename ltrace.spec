@@ -1,11 +1,14 @@
 Summary: Tracks runtime library calls from dynamically linked executables.
 Name: ltrace
-Version: 0.3.6
-Release: 2
+Version: 0.3.8
+Release: 1
 Source: ftp://ftp.debian.org/debian/dists/unstable/main/source/utils/ltrace_%{version}.tar.gz
 Copyright: GPL
 Group: Development/Debuggers
 ExclusiveArch: i386
+ExclusiveArch: i486
+ExclusiveArch: i586
+ExclusiveArch: i686
 Prefix: %{_prefix}
 BuildRoot: /var/tmp/%{name}-root
 
