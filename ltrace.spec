@@ -3,7 +3,7 @@ Summary(es):	Enseña información sobre las llamadas a funciones de bibliotecas en
 Summary(pl):	¦ledzenie odwo³añ do bibliotek w plikach linkowanych dynamicznie
 Summary(pt_BR):	Mostra informações sobre as chamadas à funções de bibliotecas em binários dinamicamente ligados
 Name:		ltrace
-Version:	0.3.15
+Version:	0.3.16
 Release:	1
 License:	GPL
 Group:		Development/Debuggers
