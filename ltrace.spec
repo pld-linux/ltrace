@@ -41,6 +41,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 %doc COPYING README TODO BUGS
-%{_prefix}/bin/ltrace
-%{_prefix}/man/man1/ltrace.1
+%{_bindir}/ltrace
+%{_mandir}/man1/ltrace.1
 %config /etc/ltrace.conf
