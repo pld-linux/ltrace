@@ -74,10 +74,7 @@ Ltrace - це програма, яка запуска╓ вказану програму та перехвачу╓ й
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%ifarch sparc sparcv9 sparc64 alpha
-# alpha patch was made against ltrace+sparc patch
 %patch3 -p1
-%endif
 %ifarch alpha
 %patch4 -p1
 %endif
