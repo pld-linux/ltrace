@@ -12,6 +12,7 @@ Group:		Development/Debuggers
 Source0:	ftp://ftp.debian.org/debian/pool/main/l/%{name}/%{name}_%{version}.tar.gz
 Patch0:		%{name}-nsyscals0.patch
 Patch1:		%{name}-Makefile.in.patch
+URL:		http://packages.debian.org/unstable/utils/ltrace.html
 BuildRequires:	autoconf
 BuildRequires:	automake
 ExclusiveArch:	%{ix86} m68k armv4b armv4l ppc
@@ -79,14 +80,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
-gzip -9nf README TODO BUGS
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc {README,TODO,BUGS}.gz
+%doc README TODO BUGS
 %config %verify(not size mtime md5) %{_sysconfdir}/ltrace.conf
 %attr(755,root,root) %{_bindir}/ltrace
 
