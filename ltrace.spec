@@ -6,7 +6,7 @@ Summary(ru):	Выводит трассу библиотечных и системных вызовов программы
 Summary(uk):	Вида╓ трасу б╕бл╕отечних та системних виклик╕в програми
 Name:		ltrace
 Version:	0.3.31
-Release:	7
+Release:	8
 License:	GPL
 Group:		Development/Debuggers
 Source0:	ftp://ftp.debian.org/debian/pool/main/l/%{name}/%{name}_%{version}.tar.gz
@@ -71,9 +71,14 @@ Ltrace - це програма, яка запуска╓ вказану програму та перехвачу╓ й
 виклики цього процесу.
 
 %prep
+%ifarch amd64
 %setup -q -a 1
+%else
+%setup -q
+%endif
 %patch0 -p1
-%ifarch sparc sparcv9 sparc64
+%ifarch sparc sparcv9 sparc64 alpha
+# alpha patch was made against ltrace+sparc patch
 %patch1 -p1
 %endif
 %ifarch alpha
