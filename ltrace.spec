@@ -5,12 +5,12 @@ Summary(pt_BR):	Mostra informaГУes sobre as chamadas Ю funГУes de bibliotecas em
 Summary(ru):	Выводит трассу библиотечных и системных вызовов программы
 Summary(uk):	Вида╓ трасу б╕бл╕отечних та системних виклик╕в програми
 Name:		ltrace
-Version:	0.3.35
+Version:	0.3.35.1
 Release:	1
 License:	GPL
 Group:		Development/Debuggers
 Source0:	ftp://ftp.debian.org/debian/pool/main/l/ltrace/%{name}_%{version}.tar.gz
-# Source0-md5:	14a925a621a4720e1dd6a6b5465547ef
+# Source0-md5:	560d8d64dea0907c161127eab3a66a9d
 Patch0:		%{name}-Makefile.in.patch
 URL:		http://packages.debian.org/unstable/utils/ltrace.html
 BuildRequires:	autoconf
