@@ -7,8 +7,6 @@ Version:	0.3.16
 Release:	1
 License:	GPL
 Group:		Development/Debuggers
-Group(de):	Entwicklung/Debugger
-Group(pl):	Programowanie/Odpluskwiacze
 Source0:	ftp://ftp.debian.org/debian/pool/main/l/%{name}/%{name}_%{version}.tar.gz
 ExclusiveArch:	%{ix86} m68k armv4b armv4l
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
