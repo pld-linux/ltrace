@@ -1,31 +1,32 @@
---- ltrace-0.3.23/Makefile.in~	Tue Mar 19 22:39:07 2002
-+++ ltrace-0.3.23/Makefile.in	Tue Mar 19 22:45:43 2002
-@@ -10,9 +10,13 @@
+--- ltrace-0.3.26/Makefile.in	Mon Apr  1 09:42:30 2002
++++ ltrace-0.3.26/Makefile.in.orig	Mon Apr  1 09:47:10 2002
+@@ -16,9 +16,14 @@
  CC	=	@CC@
  CPPFLAGS =	-I$(TOPDIR) -I$(TOPDIR)/sysdeps/$(OS) -I- @DEFS@
- CFLAGS	=	-Wall @CFLAGS@
+ CFLAGS	=	-Wall @CFLAGS@ -DSYSCONFDIR=\"$(sysconfdir)\"
 -LDFLAGS	=
-+LDFLAGS	=	@LDFLAGS@
++LDFLAGS	=       @LDFLAGS@
  LIBS	=	@LIBS@
  
-+INSTALL =	@INSTALL@
-+mandir =	@mandir@
-+bindir =	@bindir@
++INSTALL =      @INSTALL@
++mandir =       @mandir@
++bindir =       @bindir@
++
 +
  OBJ	=	ltrace.o options.o elf.o output.o read_config_file.o	\
  		execute_program.o wait_for_something.o process_event.o	\
  		display_args.o breakpoints.o proc.o demangle.o
-@@ -40,12 +44,11 @@
+@@ -46,12 +51,11 @@
  		( cd .. ; tar zcvf ltrace-`date +%y%m%d`.tgz ltrace )
  
  install:	ltrace
--		@INSTALL@ -d $(DESTDIR)/usr/bin $(DESTDIR)/usr/doc/ltrace $(DESTDIR)/usr/share/man/man1
--		@INSTALL@ -d $(DESTDIR)/etc
--		@INSTALL@ -s ltrace $(DESTDIR)/usr/bin
--		@INSTALL@ -m 644 etc/ltrace.conf $(DESTDIR)/etc
--		@INSTALL@ -m 644 COPYING README TODO BUGS ChangeLog $(DESTDIR)/usr/doc/ltrace
--		@INSTALL@ -m 644 ltrace.1 $(DESTDIR)/usr/share/man/man1
-+		$(INSTALL) -d $(DESTDIR)$(bindir) $(DESTDIR)$(mandir)/man1
+-		@INSTALL@ -d $(DESTDIR)$(bindir) $(DESTDIR)$(docdir) $(DESTDIR)$(mandir)/man1
+-		@INSTALL@ -d $(DESTDIR)$(sysconfdir)
+-		@INSTALL@ -s ltrace $(DESTDIR)$(bindir)
+-		@INSTALL@ -m 644 etc/ltrace.conf $(DESTDIR)$(sysconfdir)
+-		@INSTALL@ -m 644 COPYING README TODO BUGS ChangeLog $(DESTDIR)$(docdir)
+-		@INSTALL@ -m 644 ltrace.1 $(DESTDIR)$(mandir)/man1
++		$(INSTALL) -d $(DESTDIR)$(bindir) $(DESTDIR)$(mandir)/man1		
 +		$(INSTALL) -d $(DESTDIR)/etc
 +		$(INSTALL) ltrace $(DESTDIR)$(bindir)
 +		$(INSTALL) -m 644 etc/ltrace.conf $(DESTDIR)/etc
