@@ -75,9 +75,7 @@ Ltrace - це програма, яка запуска╓ вказану програму та перехвачу╓ й
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%ifarch alpha
 %patch4 -p1
-%endif
 
 %build
 cp -f /usr/share/automake/config.* .
