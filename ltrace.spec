@@ -70,7 +70,7 @@ Ltrace - це програма, яка запуска╓ вказану програму та перехвачу╓ й
 %patch1 -p1
 
 %build
-aclocal
+%{__aclocal}
 %{__autoconf}
 %configure
 %{__make}
