@@ -49,7 +49,7 @@ chamadas ao sistema operacional feitas pelo programa.
 
 %build
 %configure2_13
-%{__make}
+%{__make} LDFLAGS="%{rpmldflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
