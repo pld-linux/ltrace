@@ -31,7 +31,6 @@ dzia³ania programów, powiniene¶ zainstalowaæ ltrace.
 %setup -q
 
 %build
-LDFLAGS="-s"; export LDFLAGS
 %configure
 %{__make}
 
@@ -40,8 +39,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/* \
-	README TODO BUGS
+gzip -9nf README TODO BUGS
 
 %clean
 rm -rf $RPM_BUILD_ROOT
