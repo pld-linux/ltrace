@@ -2,7 +2,7 @@ Summary:	Tracks runtime library calls from dynamically linked executables
 Summary(pl):	¦ledzenie odwo³añ do bibliotek w plikach linkowanych dynamicznie
 Name:		ltrace
 Version:	0.3.10
-Release:	2
+Release:	3
 License:	GPL
 Group:		Development/Debuggers
 Group(de):	Entwicklung/Debugger
@@ -33,7 +33,7 @@ powiniene¶ zainstalowaæ ltrace.
 %setup -q
 
 %build
-%configure
+%configure2_13
 %{__make}
 
 %install
