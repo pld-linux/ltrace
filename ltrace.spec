@@ -6,17 +6,19 @@ Summary(ru):	Выводит трассу библиотечных и системных вызовов программы
 Summary(uk):	Вида╓ трасу б╕бл╕отечних та системних виклик╕в програми
 Name:		ltrace
 Version:	0.3.31
-Release:	5
+Release:	6
 License:	GPL
 Group:		Development/Debuggers
 Source0:	ftp://ftp.debian.org/debian/pool/main/l/%{name}/%{name}_%{version}.tar.gz
 # Source0-md5:	7bef142861646ad33dc749fbaf96761e
 Patch0:		%{name}-Makefile.in.patch
 Patch1:		%{name}-sparc.patch
+# faaar from perfect, but better than nothing...
+Patch2:		%{name}-alpha.patch
 URL:		http://packages.debian.org/unstable/utils/ltrace.html
 BuildRequires:	autoconf
 BuildRequires:	automake
-ExclusiveArch:	%{ix86} m68k armv4b armv4l ppc s390 sparc
+ExclusiveArch:	alpha armv4b armv4l %{ix86} m68k ppc s390 sparc
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -69,6 +71,9 @@ Ltrace - це програма, яка запуска╓ вказану програму та перехвачу╓ й
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%ifarch alpha
+%patch2 -p1
+%endif
 
 %build
 %{__aclocal}
