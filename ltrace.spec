@@ -6,7 +6,7 @@ Summary(ru):	Выводит трассу библиотечных и системных вызовов программы
 Summary(uk):	Вида╓ трасу б╕бл╕отечних та системних виклик╕в програми
 Name:		ltrace
 Version:	0.3.26
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Debuggers
 Source0:	ftp://ftp.debian.org/debian/pool/main/l/%{name}/%{name}_%{version}.tar.gz
@@ -14,7 +14,7 @@ Patch0:		%{name}-nsyscals0.patch
 Patch1:		%{name}-Makefile.in.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
-ExclusiveArch:	%{ix86} m68k armv4b armv4l
+ExclusiveArch:	%{ix86} m68k armv4b armv4l ppc
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
