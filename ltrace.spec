@@ -5,7 +5,7 @@ Summary(pt_BR):	Mostra informaГУes sobre as chamadas Ю funГУes de bibliotecas em
 Summary(ru):	Выводит трассу библиотечных и системных вызовов программы
 Summary(uk):	Вида╓ трасу б╕бл╕отечних та системних виклик╕в програми
 Name:		ltrace
-Version:	0.3.23
+Version:	0.3.26
 Release:	1
 License:	GPL
 Group:		Development/Debuggers
