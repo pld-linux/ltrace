@@ -989,7 +989,7 @@ diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/sparc/syscallent.h ltrace-0.3.32/
 diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/sparc/trace.c ltrace-0.3.32/sysdeps/linux-gnu/sparc/trace.c
 --- ltrace-0.3.32.orig/sysdeps/linux-gnu/sparc/trace.c	1970-01-01 01:00:00.000000000 +0100
 +++ ltrace-0.3.32/sysdeps/linux-gnu/sparc/trace.c	2004-04-18 19:15:11.126257640 +0200
-@@ -0,0 +1,80 @@
+@@ -0,0 +1,81 @@
 +#if HAVE_CONFIG_H
 +#include "config.h"
 +#endif
@@ -998,6 +998,7 @@ diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/sparc/trace.c ltrace-0.3.32/sysde
 +#include <sys/types.h>
 +#include <sys/wait.h>
 +#include <signal.h>
++#include <string.h>
 +#include "ptrace.h"
 +#include "ltrace.h"
 +
