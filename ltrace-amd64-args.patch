@@ -1,0 +1,13 @@
+--- ltrace-0.3.32/sysdeps/linux-gnu/x86_64/trace.c.orig	2004-04-04 00:09:56.000000000 +0200
++++ ltrace-0.3.32/sysdeps/linux-gnu/x86_64/trace.c	2004-04-18 19:06:22.205665792 +0200
+@@ -53,8 +53,8 @@
+ 			case 4:	return ptrace(PTRACE_PEEKUSER, proc->pid, 8*R8, 0);
+ 			case 5:	return ptrace(PTRACE_PEEKUSER, proc->pid, 8*R9, 0);
+ 			default:
+-				fprintf(stderr, "gimme_arg called with wrong arguments\n");
+-				exit(2);
++				return ptrace(PTRACE_PEEKTEXT, proc->pid,
++					proc->stack_pointer + 8 * (arg_num - 6 + 1), 0);	
+ 		}
+ 	} else if (type==LT_TOF_SYSCALL) {
+ 		switch(arg_num) {
