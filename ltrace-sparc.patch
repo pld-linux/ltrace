@@ -1,38 +1,6 @@
-diff -Nur ltrace-0.3.31.orig/README ltrace-0.3.31/README
---- ltrace-0.3.31.orig/README	2003-01-30 14:46:56.000000000 +0000
-+++ ltrace-0.3.31/README	2003-11-19 22:51:47.000000000 +0000
-@@ -28,6 +28,7 @@
- * Silvio Cesare <silvio@big.net.au> (ELF hacking)
- * Timothy Fesig <slate@us.ibm.com> (S390 port)
- * Anton Blanchard <anton@samba.org> (Powerpc port)
-+* Jakub Jelinek <jakub@redhat.com> (SPARC port)
- 
- 1. Introduction
- ---------------
-@@ -53,7 +54,7 @@
- ---------------------
- At the time of writting, it works only with ELF32 executables. It only
- works in Linux, and it only works on some architectures (i386, m68k,
--S/390, ARM and PowerPC processors).
-+S/390, ARM, SPARC and PowerPC processors).
- 
- It is part of at least Debian GNU/Linux, RedHat, SuSE and Mandrake.
- 
-diff -Nur ltrace-0.3.31.orig/TODO ltrace-0.3.31/TODO
---- ltrace-0.3.31.orig/TODO	2003-02-01 14:10:19.000000000 +0000
-+++ ltrace-0.3.31/TODO	2003-11-19 23:05:54.000000000 +0000
-@@ -18,7 +18,7 @@
- * netscape:
-   + Why does it show so many `breakpointed at:' messages?
-     \- Is this still true?
--* More architectures: sparc, alpha
-+* More architectures: sparc64, alpha
- * More operating systems (solaris?)
- * Option -I (inter-library calls)
- * Modify ARGTYPE_STRING[0-5] types so that they not stop displaying chars when '\0' is encountered
-diff -Nur ltrace-0.3.31.orig/debian/copyright ltrace-0.3.31/debian/copyright
---- ltrace-0.3.31.orig/debian/copyright	2003-01-30 14:47:21.000000000 +0000
-+++ ltrace-0.3.31/debian/copyright	2003-11-19 22:34:52.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/debian/copyright ltrace-0.3.32/debian/copyright
+--- ltrace-0.3.32.orig/debian/copyright	2004-04-04 00:03:19.000000000 +0200
++++ ltrace-0.3.32/debian/copyright	2004-04-18 19:15:11.019273904 +0200
 @@ -12,6 +12,7 @@
  s390 port: Copyright (C) 2001 IBM Poughkeepsie, IBM Cororation <slate@us.ibm.com>
  ELF hacking: Copyright (C) 1999 Silvio Cesare <silvio@big.net.au>
@@ -41,9 +9,9 @@ diff -Nur ltrace-0.3.31.orig/debian/copyright ltrace-0.3.31/debian/copyright
  
  
  Autoconf stuff: Copyright 1992-1996 Free Software Foundation, Inc.
-diff -Nur ltrace-0.3.31.orig/display_args.c ltrace-0.3.31/display_args.c
---- ltrace-0.3.31.orig/display_args.c	2002-03-01 16:15:14.000000000 +0000
-+++ ltrace-0.3.31/display_args.c	2003-11-19 22:38:48.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/display_args.c ltrace-0.3.32/display_args.c
+--- ltrace-0.3.32.orig/display_args.c	2004-04-18 19:14:50.000000000 +0200
++++ ltrace-0.3.32/display_args.c	2004-04-18 19:15:11.022273448 +0200
 @@ -85,7 +85,7 @@
  static int
  display_string(enum tof type, struct process * proc, int arg_num) {
@@ -71,10 +39,10 @@ diff -Nur ltrace-0.3.31.orig/display_args.c ltrace-0.3.31/display_args.c
  				if (c == '%') {
  					break;
  				} else if (!c) {
-diff -Nur ltrace-0.3.31.orig/elf.c ltrace-0.3.31/elf.c
---- ltrace-0.3.31.orig/elf.c	2003-01-31 09:48:12.000000000 +0000
-+++ ltrace-0.3.31/elf.c	2003-11-19 23:17:09.000000000 +0000
-@@ -156,7 +156,11 @@
+diff -Nur ltrace-0.3.32.orig/elf.c ltrace-0.3.32/elf.c
+--- ltrace-0.3.32.orig/elf.c	2004-04-04 00:32:25.000000000 +0200
++++ ltrace-0.3.32/elf.c	2004-04-18 19:15:11.028272536 +0200
+@@ -167,7 +167,11 @@
  		exit(1);
  	}
  
@@ -86,9 +54,9 @@ diff -Nur ltrace-0.3.31.orig/elf.c ltrace-0.3.31/elf.c
  	library_symbols->name = &lte->strtab[lte->symtab[i].st_name];
  	library_symbols->next = tmp;
  
-diff -Nur ltrace-0.3.31.orig/ltrace.1 ltrace-0.3.31/ltrace.1
---- ltrace-0.3.31.orig/ltrace.1	2003-02-02 23:22:03.000000000 +0000
-+++ ltrace-0.3.31/ltrace.1	2003-11-19 22:39:05.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/ltrace.1 ltrace-0.3.32/ltrace.1
+--- ltrace-0.3.32.orig/ltrace.1	2003-03-30 16:38:36.000000000 +0200
++++ ltrace-0.3.32/ltrace.1	2004-04-18 19:15:11.031272080 +0200
 @@ -138,7 +138,7 @@
  .LP
  Option -f sometimes fails to trace some children.
@@ -98,9 +66,9 @@ diff -Nur ltrace-0.3.31.orig/ltrace.1 ltrace-0.3.31/ltrace.1
  .LP
  Only ELF32 binaries are supported.
  .PP
-diff -Nur ltrace-0.3.31.orig/ltrace.h ltrace-0.3.31/ltrace.h
---- ltrace-0.3.31.orig/ltrace.h	2003-02-04 22:19:04.000000000 +0000
-+++ ltrace-0.3.31/ltrace.h	2003-11-19 22:42:19.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/ltrace.h ltrace-0.3.32/ltrace.h
+--- ltrace-0.3.32.orig/ltrace.h	2004-04-04 00:08:27.000000000 +0200
++++ ltrace-0.3.32/ltrace.h	2004-04-18 19:15:11.037271168 +0200
 @@ -43,7 +43,9 @@
  enum tof {
  	LT_TOF_NONE=0,
@@ -142,19 +110,19 @@ diff -Nur ltrace-0.3.31.orig/ltrace.h ltrace-0.3.31/ltrace.h
  extern long gimme_arg(enum tof type, struct process * proc, int arg_num);
 +extern void save_register_args(enum tof type, struct process * proc);
  extern int umovestr(struct process * proc, void * addr, int len, void * laddr);
+ extern int ffcheck(void *maddr);
  #if 0	/* not yet */
- extern int umoven(struct process * proc, void * addr, int len, void * laddr);
-diff -Nur ltrace-0.3.31.orig/output.c ltrace-0.3.31/output.c
---- ltrace-0.3.31.orig/output.c	2003-02-02 21:51:33.000000000 +0000
-+++ ltrace-0.3.31/output.c	2003-11-19 22:46:21.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/output.c ltrace-0.3.32/output.c
+--- ltrace-0.3.32.orig/output.c	2004-04-18 19:14:50.000000000 +0200
++++ ltrace-0.3.32/output.c	2004-04-18 19:18:52.958534008 +0200
 @@ -87,7 +87,7 @@
  		}
  	}
  	if (opt_i) {
 -		if (type==LT_TOF_FUNCTION) {
 +		if (type==LT_TOF_FUNCTION || type==LT_TOF_FUNCTIONR) {
- 			current_column += fprintf(output, "[%08x] ",
- 				(unsigned)proc->return_addr);
+ 			current_column += fprintf(output, "[%p] ",
+ 				proc->return_addr);
  		} else {
 @@ -196,6 +196,8 @@
  				current_column += fprintf(output, ", ");
@@ -165,9 +133,9 @@ diff -Nur ltrace-0.3.31.orig/output.c ltrace-0.3.31/output.c
  	}
  }
  
-diff -Nur ltrace-0.3.31.orig/proc.c ltrace-0.3.31/proc.c
---- ltrace-0.3.31.orig/proc.c	2003-02-04 22:19:37.000000000 +0000
-+++ ltrace-0.3.31/proc.c	2003-11-19 22:47:13.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/proc.c ltrace-0.3.32/proc.c
+--- ltrace-0.3.32.orig/proc.c	2003-02-04 23:19:37.000000000 +0100
++++ ltrace-0.3.32/proc.c	2004-04-18 19:15:11.048269496 +0200
 @@ -20,6 +20,7 @@
  		perror("malloc");
  		exit(1);
@@ -176,9 +144,9 @@ diff -Nur ltrace-0.3.31.orig/proc.c ltrace-0.3.31/proc.c
  	proc->filename = filename;
  	proc->pid = 0;
  	proc->breakpoints = NULL;
-diff -Nur ltrace-0.3.31.orig/process_event.c ltrace-0.3.31/process_event.c
---- ltrace-0.3.31.orig/process_event.c	2003-02-04 21:48:21.000000000 +0000
-+++ ltrace-0.3.31/process_event.c	2003-11-19 22:49:27.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/process_event.c ltrace-0.3.32/process_event.c
+--- ltrace-0.3.32.orig/process_event.c	2004-04-04 00:53:48.000000000 +0200
++++ ltrace-0.3.32/process_event.c	2004-04-18 19:15:11.051269040 +0200
 @@ -196,7 +196,7 @@
  	}
  	if (fork_p(event->e_un.sysnum)) {
@@ -221,14 +189,34 @@ diff -Nur ltrace-0.3.31.orig/process_event.c ltrace-0.3.31/process_event.c
  			output_left(LT_TOF_FUNCTION, event->proc, tmp->name);
  			callstack_push_symfunc(event->proc, tmp);
  			continue_after_breakpoint(event->proc, address2bpstruct(event->proc, tmp->enter_addr));
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/arm/ptrace.h ltrace-0.3.31/sysdeps/linux-gnu/arm/ptrace.h
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/arm/ptrace.h	1970-01-01 00:00:00.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/arm/ptrace.h	2003-11-19 23:07:10.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/README ltrace-0.3.32/README
+--- ltrace-0.3.32.orig/README	2003-01-30 15:46:56.000000000 +0100
++++ ltrace-0.3.32/README	2004-04-18 19:15:11.011275120 +0200
+@@ -28,6 +28,7 @@
+ * Silvio Cesare <silvio@big.net.au> (ELF hacking)
+ * Timothy Fesig <slate@us.ibm.com> (S390 port)
+ * Anton Blanchard <anton@samba.org> (Powerpc port)
++* Jakub Jelinek <jakub@redhat.com> (SPARC port)
+ 
+ 1. Introduction
+ ---------------
+@@ -53,7 +54,7 @@
+ ---------------------
+ At the time of writting, it works only with ELF32 executables. It only
+ works in Linux, and it only works on some architectures (i386, m68k,
+-S/390, ARM and PowerPC processors).
++S/390, ARM, SPARC and PowerPC processors).
+ 
+ It is part of at least Debian GNU/Linux, RedHat, SuSE and Mandrake.
+ 
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/arm/ptrace.h ltrace-0.3.32/sysdeps/linux-gnu/arm/ptrace.h
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/arm/ptrace.h	1970-01-01 01:00:00.000000000 +0100
++++ ltrace-0.3.32/sysdeps/linux-gnu/arm/ptrace.h	2004-04-18 19:15:11.054268584 +0200
 @@ -0,0 +1 @@
 +#include <sys/ptrace.h>
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/arm/regs.c ltrace-0.3.31/sysdeps/linux-gnu/arm/regs.c
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/arm/regs.c	2002-03-03 17:09:51.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/arm/regs.c	2003-11-19 22:53:16.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/arm/regs.c ltrace-0.3.32/sysdeps/linux-gnu/arm/regs.c
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/arm/regs.c	2002-03-03 18:09:51.000000000 +0100
++++ ltrace-0.3.32/sysdeps/linux-gnu/arm/regs.c	2004-04-18 19:15:11.058267976 +0200
 @@ -6,6 +6,8 @@
  #include <sys/ptrace.h>
  #include <asm/ptrace.h>
@@ -270,9 +258,9 @@ diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/arm/regs.c ltrace-0.3.31/sysdeps/
 +get_return_addr(struct process * proc, void * stack_pointer) {
 +	return (void *)ptrace(PTRACE_PEEKUSER, proc->pid, off_lr, 0);
  }
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/arm/trace.c ltrace-0.3.31/sysdeps/linux-gnu/arm/trace.c
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/arm/trace.c	2002-03-03 17:13:05.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/arm/trace.c	2003-11-19 22:54:15.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/arm/trace.c ltrace-0.3.32/sysdeps/linux-gnu/arm/trace.c
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/arm/trace.c	2002-03-03 18:13:05.000000000 +0100
++++ ltrace-0.3.32/sysdeps/linux-gnu/arm/trace.c	2004-04-18 19:15:11.061267520 +0200
 @@ -26,6 +26,10 @@
  #define off_ip 48
  #define off_pc 60
@@ -308,14 +296,14 @@ diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/arm/trace.c ltrace-0.3.31/sysdeps
 +void save_register_args(enum tof type, struct process * proc)
 +{
 +}
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/i386/ptrace.h ltrace-0.3.31/sysdeps/linux-gnu/i386/ptrace.h
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/i386/ptrace.h	1970-01-01 00:00:00.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/i386/ptrace.h	2003-11-19 23:07:33.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/i386/ptrace.h ltrace-0.3.32/sysdeps/linux-gnu/i386/ptrace.h
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/i386/ptrace.h	1970-01-01 01:00:00.000000000 +0100
++++ ltrace-0.3.32/sysdeps/linux-gnu/i386/ptrace.h	2004-04-18 19:15:11.063267216 +0200
 @@ -0,0 +1 @@
 +#include <sys/ptrace.h>
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/i386/regs.c ltrace-0.3.31/sysdeps/linux-gnu/i386/regs.c
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/i386/regs.c	2003-02-04 22:17:32.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/i386/regs.c	2003-11-19 22:54:37.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/i386/regs.c ltrace-0.3.32/sysdeps/linux-gnu/i386/regs.c
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/i386/regs.c	2003-02-04 23:17:32.000000000 +0100
++++ ltrace-0.3.32/sysdeps/linux-gnu/i386/regs.c	2004-04-18 19:15:11.066266760 +0200
 @@ -6,6 +6,8 @@
  #include <sys/ptrace.h>
  #include <asm/ptrace.h>
@@ -355,9 +343,9 @@ diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/i386/regs.c ltrace-0.3.31/sysdeps
 +get_return_addr(struct process * proc, void * stack_pointer) {
 +	return (void *)ptrace(PTRACE_PEEKTEXT, proc->pid, stack_pointer, 0);
  }
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/i386/trace.c ltrace-0.3.31/sysdeps/linux-gnu/i386/trace.c
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/i386/trace.c	2003-02-04 22:18:40.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/i386/trace.c	2003-11-19 22:55:09.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/i386/trace.c ltrace-0.3.32/sysdeps/linux-gnu/i386/trace.c
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/i386/trace.c	2003-02-04 23:18:40.000000000 +0100
++++ ltrace-0.3.32/sysdeps/linux-gnu/i386/trace.c	2004-04-18 19:15:11.069266304 +0200
 @@ -19,6 +19,10 @@
  # define PTRACE_POKEUSER PTRACE_POKEUSR
  #endif
@@ -389,14 +377,14 @@ diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/i386/trace.c ltrace-0.3.31/sysdep
 +void save_register_args(enum tof type, struct process * proc)
 +{
 +}
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/m68k/ptrace.h ltrace-0.3.31/sysdeps/linux-gnu/m68k/ptrace.h
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/m68k/ptrace.h	1970-01-01 00:00:00.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/m68k/ptrace.h	2003-11-19 23:07:48.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/m68k/ptrace.h ltrace-0.3.32/sysdeps/linux-gnu/m68k/ptrace.h
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/m68k/ptrace.h	1970-01-01 01:00:00.000000000 +0100
++++ ltrace-0.3.32/sysdeps/linux-gnu/m68k/ptrace.h	2004-04-18 19:15:11.072265848 +0200
 @@ -0,0 +1 @@
 +#include <sys/ptrace.h>
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/m68k/regs.c ltrace-0.3.31/sysdeps/linux-gnu/m68k/regs.c
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/m68k/regs.c	2002-03-03 17:10:19.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/m68k/regs.c	2003-11-19 22:58:22.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/m68k/regs.c ltrace-0.3.32/sysdeps/linux-gnu/m68k/regs.c
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/m68k/regs.c	2002-03-03 18:10:19.000000000 +0100
++++ ltrace-0.3.32/sysdeps/linux-gnu/m68k/regs.c	2004-04-18 19:15:11.075265392 +0200
 @@ -6,6 +6,8 @@
  #include <sys/ptrace.h>
  #include <asm/ptrace.h>
@@ -436,9 +424,9 @@ diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/m68k/regs.c ltrace-0.3.31/sysdeps
 +get_return_addr(struct process * proc, void * stack_pointer) {
 +	return (void *)ptrace(PTRACE_PEEKTEXT, proc->pid, stack_pointer, 0);
  }
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/m68k/trace.c ltrace-0.3.31/sysdeps/linux-gnu/m68k/trace.c
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/m68k/trace.c	2002-03-03 17:13:17.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/m68k/trace.c	2003-11-19 22:59:13.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/m68k/trace.c ltrace-0.3.32/sysdeps/linux-gnu/m68k/trace.c
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/m68k/trace.c	2002-03-03 18:13:17.000000000 +0100
++++ ltrace-0.3.32/sysdeps/linux-gnu/m68k/trace.c	2004-04-18 19:15:11.078264936 +0200
 @@ -18,6 +18,10 @@
  # define PTRACE_POKEUSER PTRACE_POKEUSR
  #endif
@@ -470,14 +458,14 @@ diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/m68k/trace.c ltrace-0.3.31/sysdep
 +void save_register_args(enum tof type, struct process * proc)
 +{
 +}
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/ppc/ptrace.h ltrace-0.3.31/sysdeps/linux-gnu/ppc/ptrace.h
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/ppc/ptrace.h	1970-01-01 00:00:00.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/ppc/ptrace.h	2003-11-19 23:08:16.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/ppc/ptrace.h ltrace-0.3.32/sysdeps/linux-gnu/ppc/ptrace.h
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/ppc/ptrace.h	1970-01-01 01:00:00.000000000 +0100
++++ ltrace-0.3.32/sysdeps/linux-gnu/ppc/ptrace.h	2004-04-18 19:15:11.080264632 +0200
 @@ -0,0 +1 @@
 +#include <sys/ptrace.h>
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/ppc/regs.c ltrace-0.3.31/sysdeps/linux-gnu/ppc/regs.c
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/ppc/regs.c	2002-03-31 17:55:32.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/ppc/regs.c	2003-11-19 23:00:04.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/ppc/regs.c ltrace-0.3.32/sysdeps/linux-gnu/ppc/regs.c
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/ppc/regs.c	2002-03-31 19:55:32.000000000 +0200
++++ ltrace-0.3.32/sysdeps/linux-gnu/ppc/regs.c	2004-04-18 19:15:11.083264176 +0200
 @@ -6,6 +6,8 @@
  #include <sys/ptrace.h>
  #include <asm/ptrace.h>
@@ -517,9 +505,9 @@ diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/ppc/regs.c ltrace-0.3.31/sysdeps/
 +get_return_addr(struct process * proc, void * stack_pointer) {
 +	return (void *)ptrace(PTRACE_PEEKUSER, proc->pid, 4*PT_LNK, 0);
  }
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/ppc/trace.c ltrace-0.3.31/sysdeps/linux-gnu/ppc/trace.c
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/ppc/trace.c	2002-03-31 18:01:28.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/ppc/trace.c	2003-11-19 23:01:23.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/ppc/trace.c ltrace-0.3.32/sysdeps/linux-gnu/ppc/trace.c
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/ppc/trace.c	2003-05-23 17:39:50.000000000 +0200
++++ ltrace-0.3.32/sysdeps/linux-gnu/ppc/trace.c	2004-04-18 19:15:11.089263264 +0200
 @@ -18,6 +18,10 @@
  # define PTRACE_POKEUSER PTRACE_POKEUSR
  #endif
@@ -531,16 +519,7 @@ diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/ppc/trace.c ltrace-0.3.31/sysdeps
  /* Returns 1 if syscall, 2 if sysret, 0 otherwise.
   */
  #define SYSCALL_INSN   0x44000002
-@@ -45,7 +49,7 @@
- 		return ptrace(PTRACE_PEEKUSER, proc->pid, 4*PT_R3, 0);
- 	}
- 
--	if (type==LT_TOF_FUNCTION || type==LT_TOF_SYSCALL) {
-+	if (type==LT_TOF_FUNCTION || type==LT_TOF_FUNCTIONR || type==LT_TOF_SYSCALL || type==LT_TOF_SYSCALLR) {
- 		if (arg_num < 8) {
- 			return ptrace(PTRACE_PEEKUSER, proc->pid, 4*(arg_num+PT_R3), 0);
- 		} else {
-@@ -57,3 +61,7 @@
+@@ -50,3 +54,7 @@
  	}
  	return 0;
  }
@@ -548,14 +527,14 @@ diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/ppc/trace.c ltrace-0.3.31/sysdeps
 +void save_register_args(enum tof type, struct process * proc)
 +{
 +}
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/s390/ptrace.h ltrace-0.3.31/sysdeps/linux-gnu/s390/ptrace.h
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/s390/ptrace.h	1970-01-01 00:00:00.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/s390/ptrace.h	2003-11-19 23:08:25.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/s390/ptrace.h ltrace-0.3.32/sysdeps/linux-gnu/s390/ptrace.h
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/s390/ptrace.h	1970-01-01 01:00:00.000000000 +0100
++++ ltrace-0.3.32/sysdeps/linux-gnu/s390/ptrace.h	2004-04-18 19:15:11.094262504 +0200
 @@ -0,0 +1 @@
 +#include <sys/ptrace.h>
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/s390/regs.c ltrace-0.3.31/sysdeps/linux-gnu/s390/regs.c
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/s390/regs.c	2002-03-03 17:10:50.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/s390/regs.c	2003-11-19 23:02:15.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/s390/regs.c ltrace-0.3.32/sysdeps/linux-gnu/s390/regs.c
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/s390/regs.c	2003-05-23 17:00:53.000000000 +0200
++++ ltrace-0.3.32/sysdeps/linux-gnu/s390/regs.c	2004-04-18 19:15:11.097262048 +0200
 @@ -11,6 +11,8 @@
  #include <sys/ptrace.h>
  #include <asm/ptrace.h>
@@ -595,9 +574,9 @@ diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/s390/regs.c ltrace-0.3.31/sysdeps
 +get_return_addr(struct process * proc, void * stack_pointer) {
 +	return (void *)(ptrace(PTRACE_PEEKUSER, proc->pid, PT_GPR14, 0) & 0x7fffffff);
  }
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/s390/trace.c ltrace-0.3.31/sysdeps/linux-gnu/s390/trace.c
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/s390/trace.c	2002-03-03 17:54:01.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/s390/trace.c	2003-11-19 23:03:09.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/s390/trace.c ltrace-0.3.32/sysdeps/linux-gnu/s390/trace.c
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/s390/trace.c	2003-05-23 17:38:08.000000000 +0200
++++ ltrace-0.3.32/sysdeps/linux-gnu/s390/trace.c	2004-04-18 19:15:11.104260984 +0200
 @@ -28,6 +28,10 @@
  # define PTRACE_POKEUSER PTRACE_POKEUSR
  #endif
@@ -609,35 +588,25 @@ diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/s390/trace.c ltrace-0.3.31/sysdep
  /* Returns 1 if syscall, 2 if sysret, 0 otherwise.
   */
  int
-@@ -77,7 +81,7 @@
- 		return ptrace(PTRACE_PEEKUSER, proc->pid, PT_GPR2, 0);
+@@ -86,3 +90,7 @@
+ 				exit(2);
  	}
- 
--	if (type==LT_TOF_FUNCTION) {
-+	if (type==LT_TOF_FUNCTION || type==LT_TOF_FUNCTIONR) {
- 		switch(arg_num) {
- 			case 0: return ptrace(PTRACE_PEEKUSER, proc->pid, PT_ORIGGPR2, 0);
- 			case 1: return ptrace(PTRACE_PEEKUSER, proc->pid, PT_GPR3, 0);
-@@ -89,7 +93,7 @@
- 					exit(2);
- 		}
- 
--	} else if (type==LT_TOF_SYSCALL) {
-+	} else if (type==LT_TOF_SYSCALL || type==LT_TOF_SYSCALLR) {
- 		switch(arg_num) {
- 			case 0: return ptrace(PTRACE_PEEKUSER, proc->pid, PT_ORIGGPR2, 0);
- 			case 1: return ptrace(PTRACE_PEEKUSER, proc->pid, PT_GPR3, 0);
-@@ -107,3 +111,7 @@
- 
- 	return 0;
  }
 +  
 +void save_register_args(enum tof type, struct process * proc)
 +{
 +}
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/Makefile ltrace-0.3.31/sysdeps/linux-gnu/sparc/Makefile
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/Makefile	1970-01-01 00:00:00.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/sparc/Makefile	2003-11-19 23:16:19.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/sparc/arch.h ltrace-0.3.32/sysdeps/linux-gnu/sparc/arch.h
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/sparc/arch.h	1970-01-01 01:00:00.000000000 +0100
++++ ltrace-0.3.32/sysdeps/linux-gnu/sparc/arch.h	2004-04-18 19:15:11.111259920 +0200
+@@ -0,0 +1,4 @@
++#define BREAKPOINT_VALUE {0x91, 0xd0, 0x20, 0x01}
++#define BREAKPOINT_LENGTH 4
++#define DECR_PC_AFTER_BREAK 0
++
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/sparc/Makefile ltrace-0.3.32/sysdeps/linux-gnu/sparc/Makefile
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/sparc/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ ltrace-0.3.32/sysdeps/linux-gnu/sparc/Makefile	2004-04-18 19:15:11.109260224 +0200
 @@ -0,0 +1,9 @@
 +OBJ	=	regs.o trace.o
 +
@@ -648,17 +617,9 @@ diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/Makefile ltrace-0.3.31/sysd
 +
 +clean:
 +		$(RM) $(OBJ) arch.o
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/arch.h ltrace-0.3.31/sysdeps/linux-gnu/sparc/arch.h
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/arch.h	1970-01-01 00:00:00.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/sparc/arch.h	2003-11-19 22:25:54.000000000 +0000
-@@ -0,0 +1,4 @@
-+#define BREAKPOINT_VALUE {0x91, 0xd0, 0x20, 0x01}
-+#define BREAKPOINT_LENGTH 4
-+#define DECR_PC_AFTER_BREAK 0
-+
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/ptrace.h ltrace-0.3.31/sysdeps/linux-gnu/sparc/ptrace.h
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/ptrace.h	1970-01-01 00:00:00.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/sparc/ptrace.h	2003-11-19 22:25:54.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/sparc/ptrace.h ltrace-0.3.32/sysdeps/linux-gnu/sparc/ptrace.h
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/sparc/ptrace.h	1970-01-01 01:00:00.000000000 +0100
++++ ltrace-0.3.32/sysdeps/linux-gnu/sparc/ptrace.h	2004-04-18 19:15:11.114259464 +0200
 @@ -0,0 +1,22 @@
 +#undef PTRACE_GETREGS
 +#undef PTRACE_SETREGS
@@ -682,9 +643,9 @@ diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/ptrace.h ltrace-0.3.31/sysd
 +	unsigned int func_arg[6];
 +	unsigned int sysc_arg[6];
 +} proc_archdep;
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/regs.c ltrace-0.3.31/sysdeps/linux-gnu/sparc/regs.c
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/regs.c	1970-01-01 00:00:00.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/sparc/regs.c	2003-11-19 22:25:54.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/sparc/regs.c ltrace-0.3.32/sysdeps/linux-gnu/sparc/regs.c
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/sparc/regs.c	1970-01-01 01:00:00.000000000 +0100
++++ ltrace-0.3.32/sysdeps/linux-gnu/sparc/regs.c	2004-04-18 19:15:11.116259160 +0200
 @@ -0,0 +1,43 @@
 +#if HAVE_CONFIG_H
 +#include "config.h"
@@ -729,9 +690,9 @@ diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/regs.c ltrace-0.3.31/sysdep
 +		return (void *)a->regs.r_o7 + 12;
 +	return (void *)a->regs.r_o7 + 8;
 +}
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/signalent.h ltrace-0.3.31/sysdeps/linux-gnu/sparc/signalent.h
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/signalent.h	1970-01-01 00:00:00.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/sparc/signalent.h	2003-11-19 22:25:54.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/sparc/signalent.h ltrace-0.3.32/sysdeps/linux-gnu/sparc/signalent.h
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/sparc/signalent.h	1970-01-01 01:00:00.000000000 +0100
++++ ltrace-0.3.32/sysdeps/linux-gnu/sparc/signalent.h	2004-04-18 19:15:11.119258704 +0200
 @@ -0,0 +1,32 @@
 +	"SIG_0",           /* 0 */
 +	"SIGHUP",          /* 1 */
@@ -765,9 +726,9 @@ diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/signalent.h ltrace-0.3.31/s
 +	"SIGLOST",         /* 29 */
 +	"SIGUSR1",         /* 30 */
 +	"SIGUSR2",         /* 31 */
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/syscallent.h ltrace-0.3.31/sysdeps/linux-gnu/sparc/syscallent.h
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/syscallent.h	1970-01-01 00:00:00.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/sparc/syscallent.h	2003-11-19 22:25:54.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/sparc/syscallent.h ltrace-0.3.32/sysdeps/linux-gnu/sparc/syscallent.h
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/sparc/syscallent.h	1970-01-01 01:00:00.000000000 +0100
++++ ltrace-0.3.32/sysdeps/linux-gnu/sparc/syscallent.h	2004-04-18 19:15:11.123258096 +0200
 @@ -0,0 +1,256 @@
 +	"0",                               /* 0 */
 +	"exit",                            /* 1 */
@@ -1025,9 +986,9 @@ diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/syscallent.h ltrace-0.3.31/
 +	"fdatasync",                       /* 253 */
 +	"nfsservctl",                      /* 254 */
 +	"aplib",                           /* 255 */
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/trace.c ltrace-0.3.31/sysdeps/linux-gnu/sparc/trace.c
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/trace.c	1970-01-01 00:00:00.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/sparc/trace.c	2003-11-19 22:34:05.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/sparc/trace.c ltrace-0.3.32/sysdeps/linux-gnu/sparc/trace.c
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/sparc/trace.c	1970-01-01 01:00:00.000000000 +0100
++++ ltrace-0.3.32/sysdeps/linux-gnu/sparc/trace.c	2004-04-18 19:15:11.126257640 +0200
 @@ -0,0 +1,80 @@
 +#if HAVE_CONFIG_H
 +#include "config.h"
@@ -1109,9 +1070,9 @@ diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/trace.c ltrace-0.3.31/sysde
 +			memcpy(a->sysc_arg, &a->regs.r_o0, sizeof(a->sysc_arg));
 +	}
 +}
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/trace.c ltrace-0.3.31/sysdeps/linux-gnu/trace.c
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/trace.c	2003-02-04 22:18:13.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/trace.c	2003-11-19 23:05:48.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/trace.c ltrace-0.3.32/sysdeps/linux-gnu/trace.c
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/trace.c	2003-02-04 23:18:13.000000000 +0100
++++ ltrace-0.3.32/sysdeps/linux-gnu/trace.c	2004-04-18 19:15:11.128257336 +0200
 @@ -4,7 +4,7 @@
  #include <errno.h>
  #include <unistd.h>
@@ -1157,9 +1118,108 @@ diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/trace.c ltrace-0.3.31/sysdeps/lin
  			} else {
  				*(char *)(laddr+offset+i) = '\0';
  				return 0;
-diff -Nur ltrace-0.3.31.orig/wait_for_something.c ltrace-0.3.31/wait_for_something.c
---- ltrace-0.3.31.orig/wait_for_something.c	2003-01-31 09:52:42.000000000 +0000
-+++ ltrace-0.3.31/wait_for_something.c	2003-11-19 23:06:50.000000000 +0000
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/x86_64/ptrace.h ltrace-0.3.32/sysdeps/linux-gnu/x86_64/ptrace.h
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/x86_64/ptrace.h	1970-01-01 01:00:00.000000000 +0100
++++ ltrace-0.3.32/sysdeps/linux-gnu/x86_64/ptrace.h	2004-04-18 19:15:11.000000000 +0200
+@@ -0,0 +1 @@
++#include <sys/ptrace.h>
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/x86_64/regs.c ltrace-0.3.32/sysdeps/linux-gnu/x86_64/regs.c
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/x86_64/regs.c	2004-04-04 00:09:56.000000000 +0200
++++ ltrace-0.3.32/sysdeps/linux-gnu/x86_64/regs.c	2004-04-18 19:25:06.402761856 +0200
+@@ -6,6 +6,8 @@
+ #include <sys/ptrace.h>
+ #include <sys/reg.h>
+ 
++#include "ltrace.h"
++
+ #if (!defined(PTRACE_PEEKUSER) && defined(PTRACE_PEEKUSR))
+ # define PTRACE_PEEKUSER PTRACE_PEEKUSR
+ #endif
+@@ -15,21 +17,21 @@
+ #endif
+ 
+ void *
+-get_instruction_pointer(pid_t pid) {
+-	return (void *)ptrace(PTRACE_PEEKUSER, pid, 8*RIP, 0);
++get_instruction_pointer(struct process *proc) {
++	return (void *)ptrace(PTRACE_PEEKUSER, proc->pid, 8*RIP, 0);
+ }
+ 
+ void
+-set_instruction_pointer(pid_t pid, long addr) {
+-	ptrace(PTRACE_POKEUSER, pid, 8*RIP, addr);
++set_instruction_pointer(struct process *proc, void *addr) {
++	ptrace(PTRACE_POKEUSER, proc->pid, 8*RIP, addr);
+ }
+ 
+ void *
+-get_stack_pointer(pid_t pid) {
+-	return (void *)ptrace(PTRACE_PEEKUSER, pid, 8*RSP, 0);
++get_stack_pointer(struct process *proc) {
++	return (void *)ptrace(PTRACE_PEEKUSER, proc->pid, 8*RSP, 0);
+ }
+ 
+ void *
+-get_return_addr(pid_t pid, void * stack_pointer) {
+-	return (void *)ptrace(PTRACE_PEEKTEXT, pid, stack_pointer, 0);
++get_return_addr(struct process *proc, void * stack_pointer) {
++	return (void *)ptrace(PTRACE_PEEKTEXT, proc->pid, stack_pointer, 0);
+ }
+diff -Nur ltrace-0.3.32.orig/sysdeps/linux-gnu/x86_64/trace.c ltrace-0.3.32/sysdeps/linux-gnu/x86_64/trace.c
+--- ltrace-0.3.32.orig/sysdeps/linux-gnu/x86_64/trace.c	2004-04-18 19:14:51.000000000 +0200
++++ ltrace-0.3.32/sysdeps/linux-gnu/x86_64/trace.c	2004-04-18 19:26:19.911586816 +0200
+@@ -19,6 +19,10 @@
+ # define PTRACE_POKEUSER PTRACE_POKEUSR
+ #endif
+ 
++void get_arch_dep(struct process *proc)
++{
++}
++
+ /* Returns 1 if syscall, 2 if sysret, 0 otherwise.
+  */
+ int
+@@ -44,7 +48,7 @@
+ 		return ptrace(PTRACE_PEEKUSER, proc->pid, 8*RAX, 0);
+ 	}
+ 
+-	if (type==LT_TOF_FUNCTION) {
++	if (type==LT_TOF_FUNCTION || type==LT_TOF_FUNCTIONR) {
+ 		switch(arg_num) {
+ 			case 0:	return ptrace(PTRACE_PEEKUSER, proc->pid, 8*RDI, 0);
+ 			case 1:	return ptrace(PTRACE_PEEKUSER, proc->pid, 8*RSI, 0);
+@@ -56,7 +60,7 @@
+ 				return ptrace(PTRACE_PEEKTEXT, proc->pid,
+ 					proc->stack_pointer + 8 * (arg_num - 6 + 1), 0);	
+ 		}
+-	} else if (type==LT_TOF_SYSCALL) {
++	} else if (type==LT_TOF_SYSCALL || LT_TOF_SYSCALLR) {
+ 		switch(arg_num) {
+ 			case 0:	return ptrace(PTRACE_PEEKUSER, proc->pid, 8*RDI, 0);
+ 			case 1:	return ptrace(PTRACE_PEEKUSER, proc->pid, 8*RSI, 0);
+@@ -75,3 +79,7 @@
+ 
+ 	return 0;
+ }
++
++void save_register_args(enum tof type, struct process * proc)
++{
++}
+diff -Nur ltrace-0.3.32.orig/TODO ltrace-0.3.32/TODO
+--- ltrace-0.3.32.orig/TODO	2003-03-30 17:00:42.000000000 +0200
++++ ltrace-0.3.32/TODO	2004-04-18 19:15:11.016274360 +0200
+@@ -16,7 +16,7 @@
+ * netscape:
+   + Why does it show so many `breakpointed at:' messages?
+     \- Is this still true?
+-* More architectures: sparc, alpha
++* More architectures: sparc64, alpha
+ * More operating systems (solaris?)
+ * Option -I (inter-library calls)
+ * Modify ARGTYPE_STRING[0-5] types so that they not stop displaying chars when '\0' is encountered
+diff -Nur ltrace-0.3.32.orig/wait_for_something.c ltrace-0.3.32/wait_for_something.c
+--- ltrace-0.3.32.orig/wait_for_something.c	2003-01-31 10:52:42.000000000 +0100
++++ ltrace-0.3.32/wait_for_something.c	2004-04-18 19:15:11.131256880 +0200
 @@ -48,6 +48,7 @@
  		fprintf(stderr, "signal from wrong pid %u ?!?\n", pid);
  		exit(1);
