@@ -1,14 +1,13 @@
-Summary: Tracks runtime library calls from dynamically linked executables.
-Summary(pl): ¦ledzenie odwo³añ do bibliotek w plikach linkowanych dynamicznie.
-Name: ltrace
-Version: 0.3.8
-Release: 1
-Source: ftp://ftp.debian.org/debian/dists/unstable/main/source/utils/ltrace_%{version}.tar.gz
-Copyright: GPL
-Group: Development/Debuggers
-ExclusiveArch: i386 i486 i586 i686
-Prefix: %{_prefix}
-BuildRoot: /var/tmp/%{name}-root
+Summary:	Tracks runtime library calls from dynamically linked executables.
+Summary(pl):	¦ledzenie odwo³añ do bibliotek w plikach linkowanych dynamicznie.
+Name:		ltrace
+Version:	0.3.8
+Release:	1
+Source:		ftp://ftp.debian.org/debian/dists/unstable/main/source/utils/%{name}_%{version}.tar.gz
+Copyright:	GPL
+Group:		Development/Debuggers
+ExclusiveArch:	i386 i486 i586 i686
+BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
 Ltrace is a debugging program which runs a specified command until the
@@ -33,21 +32,23 @@ dzia³ania programów, powiniene¶ zainstalowaæ ltrace.
 %setup -q
 
 %build
-#./configure --prefix=/usr
-
 %configure
 make
 
 %install
+rm -rf $RPM_BUILD_ROOT
+
 make DESTDIR=$RPM_BUILD_ROOT install
-rm -rf $RPM_BUILD_ROOT/%{_prefix}/doc
+
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/* \
+	README TODO BUGS
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(-,root,root)
-%doc COPYING README TODO BUGS
-%{_bindir}/ltrace
-%{_mandir}/man1/ltrace.1
+%defattr(644,root,root,755)
+%doc *.gz
 %config /etc/ltrace.conf
+%attr(755,root,root) %{_bindir}/ltrace
+%{_mandir}/man1/*
