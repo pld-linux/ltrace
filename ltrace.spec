@@ -11,13 +11,12 @@ License:	GPL
 Group:		Development/Debuggers
 Source0:	ftp://ftp.debian.org/debian/pool/main/l/%{name}/%{name}_%{version}.tar.gz
 # Source0-md5:	8637e09cbb808e816bd700c19aeb6111
-Source1:	ltrace-x86_64.tar.bz2 
-# Source1-md5:	68bca343ee654c94e41b86b86b748bf5
 Patch0:		%{name}-Makefile.in.patch
-Patch1:		%{name}-sparc.patch
+Patch1:		%{name}-64bit-fixes.patch
+Patch2:		%{name}-amd64-args.patch
+Patch3:		%{name}-sparc.patch
 # faaar from perfect, but better than nothing...
-Patch2:		%{name}-alpha.patch
-Patch3:		%{name}-64bit-fixes.patch
+Patch4:		%{name}-alpha.patch
 URL:		http://packages.debian.org/unstable/utils/ltrace.html
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -71,21 +70,16 @@ Ltrace - це програма, яка запуска╓ вказану програму та перехвачу╓ й
 виклики цього процесу.
 
 %prep
-%ifarch amd64
-%setup -q -a 1
-%else
 %setup -q
-%endif
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
 %ifarch sparc sparcv9 sparc64 alpha
 # alpha patch was made against ltrace+sparc patch
-%patch1 -p1
+%patch3 -p1
 %endif
 %ifarch alpha
-%patch2 -p1
-%endif
-%ifarch amd64
-%patch3	-p1
+%patch4 -p1
 %endif
 
 %build
