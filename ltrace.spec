@@ -6,7 +6,7 @@ Release:	1
 Source:		ftp://ftp.debian.org/debian/dists/unstable/main/source/utils/%{name}_%{version}.tar.gz
 Copyright:	GPL
 Group:		Development/Debuggers
-ExclusiveArch:	i386 i486 i586 i686
+ExclusiveArch:	i386 i486 i586 i686 m68k armv4b armv4l
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
