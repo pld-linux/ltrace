@@ -1,6 +1,6 @@
 Summary:	Tracks runtime library calls from dynamically linked executables
 Summary(es):	Enseña información sobre las llamadas a funciones de bibliotecas en binarios dinámicamente conectados
-Summary(pl):	¦ledzenie odwo³añ do bibliotek w plikach linkowanych dynamicznie
+Summary(pl):	¦ledzenie odwo³añ do bibliotek w plikach konsolidowanych dynamicznie
 Summary(pt_BR):	Mostra informações sobre as chamadas à funções de bibliotecas em binários dinamicamente ligados
 Summary(ru):	÷Ù×ÏÄÉÔ ÔÒÁÓÓÕ ÂÉÂÌÉÏÔÅŞÎÙÈ É ÓÉÓÔÅÍÎÙÈ ×ÙÚÏ×Ï× ĞÒÏÇÒÁÍÍÙ
 Summary(uk):	÷ÉÄÁ¤ ÔÒÁÓÕ Â¦ÂÌ¦ÏÔÅŞÎÉÈ ÔÁ ÓÉÓÔÅÍÎÉÈ ×ÉËÌÉË¦× ĞÒÏÇÒÁÍÉ
@@ -38,7 +38,7 @@ programa.
 %description -l pl
 Ltrace jest programem wspomagaj±cym debugowanie programów. Ltrace
 uruchamia dane polecenie przechwytuj±c i zapisuj±c odwo³ania do
-bibliotek linkowanych dynamicznie oraz sygna³y otrzymane przez
+bibliotek konsolidowanych dynamicznie oraz sygna³y otrzymane przez
 program. Ltrace potrafi tak¿e przechwytywaæ i wy¶wietlaæ odwo³ania
 systemowe wykonywane przez program. Je¶li potrzebujesz narzêdzia
 administracyjnego, przydatnego do ¶ledzenia dzia³ania programów,
