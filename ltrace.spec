@@ -9,7 +9,7 @@ Group(pl):	Programowanie/Odpluskwiacze
 Source:		ftp://ftp.debian.org/debian/dists/unstable/main/source/utils/%{name}_%{version}.tar.gz
 ExclusiveArch:	%{ix86} m68k armv4b armv4l
 BuildRequires:	binutils-static
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Ltrace is a debugging program which runs a specified command until the
