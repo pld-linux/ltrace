@@ -1,5 +1,7 @@
 Summary:	Tracks runtime library calls from dynamically linked executables
+Summary(es):	Enseña información sobre las llamadas a funciones de bibliotecas en binarios dinámicamente conectados
 Summary(pl):	¦ledzenie odwo³añ do bibliotek w plikach linkowanych dynamicznie
+Summary(pt_BR):	Mostra informações sobre as chamadas à funções de bibliotecas em binários dinamicamente ligados
 Name:		ltrace
 Version:	0.3.15
 Release:	1
@@ -20,6 +22,14 @@ intercept and print system calls executed by the process. You should
 install ltrace if you need a sysadmin tool for tracking the execution
 of processes.
 
+%description -l es
+ltrace es un programa que sencillamente ejecuta un comando
+especificado hasta su término. Intercepta y registra las llamadas, a
+las funciones de las bibliotecas compartidas, hechas por el programa
+en ejecución, y los señales recibidos por el proceso. También puede
+interceptar y enseñar las llamadas al sistema operativo hechas por el
+programa.
+
 %description -l pl
 Ltrace jest programem wspomagaj±cym debugowanie programów. Ltrace
 uruchamia dane polecenie przechwytuj±c i zapisuj±c odwo³ania do
@@ -28,6 +38,13 @@ program. Ltrace potrafi tak¿e przechwytywaæ i wy¶wietlaæ odwo³ania
 systemowe wykonywane przez program. Je¶li potrzebujesz narzêdzia
 administracyjnego, przydatnego do ¶ledzenia dzia³ania programów,
 powiniene¶ zainstalowaæ ltrace.
+
+%description -l pt_BR
+ltrace é um programa que simplesmente executa um comando especificado
+até seu término. Ele intercepta e registra as chamadas à funções a
+bibliotecas compartilhadas feitas pelo programa em execução e os
+sinais recebidos pelo processo. Também pode interceptar e mostrar as
+chamadas ao sistema operacional feitas pelo programa.
 
 %prep
 %setup -q
