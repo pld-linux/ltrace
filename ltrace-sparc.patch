@@ -648,19 +648,6 @@ diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/Makefile ltrace-0.3.31/sysd
 +
 +clean:
 +		$(RM) $(OBJ) arch.o
-diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/Makefile~ ltrace-0.3.31/sysdeps/linux-gnu/sparc/Makefile~
---- ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/Makefile~	1970-01-01 00:00:00.000000000 +0000
-+++ ltrace-0.3.31/sysdeps/linux-gnu/sparc/Makefile~	2003-11-19 22:25:54.000000000 +0000
-@@ -0,0 +1,9 @@
-+OBJ	=	breakpoint.o regs.o trace.o
-+
-+all:		arch.o
-+
-+arch.o:		$(OBJ)
-+		$(LD) -r -o arch.o $(OBJ)
-+
-+clean:
-+		$(RM) $(OBJ) arch.o
 diff -Nur ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/arch.h ltrace-0.3.31/sysdeps/linux-gnu/sparc/arch.h
 --- ltrace-0.3.31.orig/sysdeps/linux-gnu/sparc/arch.h	1970-01-01 00:00:00.000000000 +0000
 +++ ltrace-0.3.31/sysdeps/linux-gnu/sparc/arch.h	2003-11-19 22:25:54.000000000 +0000
