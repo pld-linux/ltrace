@@ -15,6 +15,9 @@ Patch0:		%{name}-Makefile.in.patch
 URL:		http://packages.debian.org/unstable/utils/ltrace.html
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	elfutils-devel
+# for libsupc++ (used for symbols demangling)
+BuildRequires:	gcc-c++
 ExclusiveArch:	alpha armv4b armv4l %{ix86} m68k ppc s390 sparc amd64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -67,6 +70,10 @@ Ltrace - це програма, яка запуска╓ вказану програму та перехвачу╓ й
 %prep
 %setup -q
 %patch0 -p1
+patch -s -p1 < debian/patches/0064bit.dpatch
+patch -s -p1 < debian/patches/01elf-rewrite.dpatch
+patch -s -p1 < debian/patches/02demangle.dpatch
+patch -s -p1 < debian/patches/03syscallent-update.dpatch
 
 %build
 cp -f /usr/share/automake/config.* .
