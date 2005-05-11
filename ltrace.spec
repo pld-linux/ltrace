@@ -18,7 +18,7 @@ BuildRequires:	automake
 BuildRequires:	elfutils-devel
 # for libsupc++ (used for symbols demangling)
 BuildRequires:	gcc-c++
-ExclusiveArch:	alpha armv4b armv4l %{ix86} m68k ppc s390 sparc amd64
+ExclusiveArch:	alpha armv4b armv4l %{ix86} m68k ppc s390 sparc %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
