@@ -1,6 +1,6 @@
---- ltrace-0.3.36/Makefile.in.orig	2004-11-10 00:12:03.000000000 +0100
-+++ ltrace-0.3.36/Makefile.in	2004-11-23 00:09:26.113911544 +0100
-@@ -9,21 +9,21 @@
+--- ltrace/Makefile.in.orig	2006-02-16 06:05:24.000000000 +0100
++++ ltrace/Makefile.in	2006-02-19 15:41:24.614555250 +0100
+@@ -9,7 +9,7 @@
  
  prefix		= @prefix@
  sysconfdir	= @sysconfdir@
@@ -9,11 +9,7 @@
  mandir		= @mandir@
  docdir		= $(prefix)/doc/ltrace
  
- CC		=	@CC@
- CPPFLAGS	=	-I$(TOPDIR) -I$(TOPDIR)/sysdeps/$(OS) -I- @DEFS@ -DSYSCONFDIR=\"$(sysconfdir)\"
- CFLAGS		=	-Wall @CFLAGS@
--LDFLAGS		=
-+LDFLAGS		=	@LDFLAGS@
+@@ -20,10 +20,10 @@
  LIBS		=	@LIBS@
  
  INSTALL		=	@INSTALL@
