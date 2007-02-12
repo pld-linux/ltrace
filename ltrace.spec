@@ -1,9 +1,9 @@
 Summary:	Tracks runtime library calls from dynamically linked executables
-Summary(es):	EnseЯa informaciСn sobre las llamadas a funciones de bibliotecas en binarios dinАmicamente conectados
-Summary(pl):	╕ledzenie odwoЁaЯ do bibliotek w plikach konsolidowanych dynamicznie
-Summary(pt_BR):	Mostra informaГУes sobre as chamadas Ю funГУes de bibliotecas em binАrios dinamicamente ligados
-Summary(ru):	Выводит трассу библиотечных и системных вызовов программы
-Summary(uk):	Вида╓ трасу б╕бл╕отечних та системних виклик╕в програми
+Summary(es.UTF-8):   Enseц╠a informaciцЁn sobre las llamadas a funciones de bibliotecas en binarios dinц║micamente conectados
+Summary(pl.UTF-8):   е ledzenie odwoе┌aе└ do bibliotek w plikach konsolidowanych dynamicznie
+Summary(pt_BR.UTF-8):   Mostra informaц╖ц╣es sobre as chamadas ц═ funц╖ц╣es de bibliotecas em binц║rios dinamicamente ligados
+Summary(ru.UTF-8):   п▓я▀п╡п╬п╢п╦я┌ я┌я─п╟я│я│я┐ п╠п╦п╠п╩п╦п╬я┌п╣я┤п╫я▀я┘ п╦ я│п╦я│я┌п╣п╪п╫я▀я┘ п╡я▀п╥п╬п╡п╬п╡ п©я─п╬пЁя─п╟п╪п╪я▀
+Summary(uk.UTF-8):   п▓п╦п╢п╟я■ я┌я─п╟я│я┐ п╠я√п╠п╩я√п╬я┌п╣я┤п╫п╦я┘ я┌п╟ я│п╦я│я┌п╣п╪п╫п╦я┘ п╡п╦п╨п╩п╦п╨я√п╡ п©я─п╬пЁя─п╟п╪п╦
 Name:		ltrace
 Version:	0.4
 Release:	1
@@ -30,42 +30,42 @@ intercept and print system calls executed by the process. You should
 install ltrace if you need a sysadmin tool for tracking the execution
 of processes.
 
-%description -l es
+%description -l es.UTF-8
 ltrace es un programa que sencillamente ejecuta un comando
-especificado hasta su tИrmino. Intercepta y registra las llamadas, a
+especificado hasta su tц╘rmino. Intercepta y registra las llamadas, a
 las funciones de las bibliotecas compartidas, hechas por el programa
-en ejecuciСn, y los seЯales recibidos por el proceso. TambiИn puede
-interceptar y enseЯar las llamadas al sistema operativo hechas por el
+en ejecuciцЁn, y los seц╠ales recibidos por el proceso. Tambiц╘n puede
+interceptar y enseц╠ar las llamadas al sistema operativo hechas por el
 programa.
 
-%description -l pl
-Ltrace jest programem wspomagaj╠cym debugowanie programСw. Ltrace
-uruchamia dane polecenie przechwytuj╠c i zapisuj╠c odwoЁania do
-bibliotek konsolidowanych dynamicznie oraz sygnaЁy otrzymane przez
-program. Ltrace potrafi tak©e przechwytywaФ i wy╤wietlaФ odwoЁania
-systemowe wykonywane przez program. Je╤li potrzebujesz narzЙdzia
-administracyjnego, przydatnego do ╤ledzenia dziaЁania programСw,
-powiniene╤ zainstalowaФ ltrace.
+%description -l pl.UTF-8
+Ltrace jest programem wspomagajд┘cym debugowanie programцЁw. Ltrace
+uruchamia dane polecenie przechwytujд┘c i zapisujд┘c odwoе┌ania do
+bibliotek konsolidowanych dynamicznie oraz sygnaе┌y otrzymane przez
+program. Ltrace potrafi takе╪e przechwytywaд┤ i wyе⌡wietlaд┤ odwoе┌ania
+systemowe wykonywane przez program. Jeе⌡li potrzebujesz narzд≥dzia
+administracyjnego, przydatnego do е⌡ledzenia dziaе┌ania programцЁw,
+powinieneе⌡ zainstalowaд┤ ltrace.
 
-%description -l pt_BR
-ltrace И um programa que simplesmente executa um comando especificado
-atИ seu tИrmino. Ele intercepta e registra as chamadas Ю funГУes a
-bibliotecas compartilhadas feitas pelo programa em execuГЦo e os
-sinais recebidos pelo processo. TambИm pode interceptar e mostrar as
+%description -l pt_BR.UTF-8
+ltrace ц╘ um programa que simplesmente executa um comando especificado
+atц╘ seu tц╘rmino. Ele intercepta e registra as chamadas ц═ funц╖ц╣es a
+bibliotecas compartilhadas feitas pelo programa em execuц╖цёo e os
+sinais recebidos pelo processo. Tambц╘m pode interceptar e mostrar as
 chamadas ao sistema operacional feitas pelo programa.
 
-%description -l ru
-Ltrace - это отладочная программа, которая запускает указанную
-программу, перехватывает и записывает как вызовы динамических
-библиотек, так и сигналы, получаемые выполняющимся процессом. Ltrace
-может также перехватывать и печатать системные вызовы, выполняемые
-процессом.
+%description -l ru.UTF-8
+Ltrace - я█я┌п╬ п╬я┌п╩п╟п╢п╬я┤п╫п╟я▐ п©я─п╬пЁя─п╟п╪п╪п╟, п╨п╬я┌п╬я─п╟я▐ п╥п╟п©я┐я│п╨п╟п╣я┌ я┐п╨п╟п╥п╟п╫п╫я┐я▌
+п©я─п╬пЁя─п╟п╪п╪я┐, п©п╣я─п╣я┘п╡п╟я┌я▀п╡п╟п╣я┌ п╦ п╥п╟п©п╦я│я▀п╡п╟п╣я┌ п╨п╟п╨ п╡я▀п╥п╬п╡я▀ п╢п╦п╫п╟п╪п╦я┤п╣я│п╨п╦я┘
+п╠п╦п╠п╩п╦п╬я┌п╣п╨, я┌п╟п╨ п╦ я│п╦пЁп╫п╟п╩я▀, п©п╬п╩я┐я┤п╟п╣п╪я▀п╣ п╡я▀п©п╬п╩п╫я▐я▌я┴п╦п╪я│я▐ п©я─п╬я├п╣я│я│п╬п╪. Ltrace
+п╪п╬п╤п╣я┌ я┌п╟п╨п╤п╣ п©п╣я─п╣я┘п╡п╟я┌я▀п╡п╟я┌я▄ п╦ п©п╣я┤п╟я┌п╟я┌я▄ я│п╦я│я┌п╣п╪п╫я▀п╣ п╡я▀п╥п╬п╡я▀, п╡я▀п©п╬п╩п╫я▐п╣п╪я▀п╣
+п©я─п╬я├п╣я│я│п╬п╪.
 
-%description -l uk
-Ltrace - це програма, яка запуска╓ вказану програму та перехвачу╓ й
-запису╓ як виклики динам╕чних б╕бл╕отек, так ╕ сигнали, як╕ отриму╓
-запущений процес. Ltrace може також перехвачувати ╕ друкувати системн╕
-виклики цього процесу.
+%description -l uk.UTF-8
+Ltrace - я├п╣ п©я─п╬пЁя─п╟п╪п╟, я▐п╨п╟ п╥п╟п©я┐я│п╨п╟я■ п╡п╨п╟п╥п╟п╫я┐ п©я─п╬пЁя─п╟п╪я┐ я┌п╟ п©п╣я─п╣я┘п╡п╟я┤я┐я■ п╧
+п╥п╟п©п╦я│я┐я■ я▐п╨ п╡п╦п╨п╩п╦п╨п╦ п╢п╦п╫п╟п╪я√я┤п╫п╦я┘ п╠я√п╠п╩я√п╬я┌п╣п╨, я┌п╟п╨ я√ я│п╦пЁп╫п╟п╩п╦, я▐п╨я√ п╬я┌я─п╦п╪я┐я■
+п╥п╟п©я┐я┴п╣п╫п╦п╧ п©я─п╬я├п╣я│. Ltrace п╪п╬п╤п╣ я┌п╟п╨п╬п╤ п©п╣я─п╣я┘п╡п╟я┤я┐п╡п╟я┌п╦ я√ п╢я─я┐п╨я┐п╡п╟я┌п╦ я│п╦я│я┌п╣п╪п╫я√
+п╡п╦п╨п╩п╦п╨п╦ я├я▄п╬пЁп╬ п©я─п╬я├п╣я│я┐.
 
 %prep
 %setup -q
