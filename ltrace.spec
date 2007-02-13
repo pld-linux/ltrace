@@ -1,9 +1,9 @@
 Summary:	Tracks runtime library calls from dynamically linked executables
-Summary(es.UTF-8):   Enseña información sobre las llamadas a funciones de bibliotecas en binarios dinámicamente conectados
-Summary(pl.UTF-8):   Śledzenie odwołań do bibliotek w plikach konsolidowanych dynamicznie
-Summary(pt_BR.UTF-8):   Mostra informações sobre as chamadas à funções de bibliotecas em binários dinamicamente ligados
-Summary(ru.UTF-8):   Выводит трассу библиотечных и системных вызовов программы
-Summary(uk.UTF-8):   Видає трасу бібліотечних та системних викликів програми
+Summary(es.UTF-8):	Enseña información sobre las llamadas a funciones de bibliotecas en binarios dinámicamente conectados
+Summary(pl.UTF-8):	Śledzenie odwołań do bibliotek w plikach konsolidowanych dynamicznie
+Summary(pt_BR.UTF-8):	Mostra informações sobre as chamadas à funções de bibliotecas em binários dinamicamente ligados
+Summary(ru.UTF-8):	Выводит трассу библиотечных и системных вызовов программы
+Summary(uk.UTF-8):	Видає трасу бібліотечних та системних викликів програми
 Name:		ltrace
 Version:	0.4
 Release:	1
