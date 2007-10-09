@@ -1,0 +1,3 @@
+- update to 0.3.10,
+- added pass LDFLAGS="-s" to ./configure environment,
+- adapter(ized).
