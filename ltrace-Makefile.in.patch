@@ -1,5 +1,5 @@
---- ltrace/Makefile.in.orig	2006-02-16 06:05:24.000000000 +0100
-+++ ltrace/Makefile.in	2006-02-19 15:41:24.614555250 +0100
+--- ltrace/Makefile.in.orig	2009-05-26 09:18:33.370743514 +0200
++++ ltrace/Makefile.in	2009-05-26 09:20:50.924001735 +0200
 @@ -9,7 +9,7 @@
  
  prefix		= @prefix@
@@ -7,28 +7,13 @@
 -bindir		= $(prefix)/bin
 +bindir		= @bindir@
  mandir		= @mandir@
- docdir		= $(prefix)/doc/ltrace
+ docdir		= $(prefix)/share/doc/ltrace
  
-@@ -20,10 +20,10 @@
- LIBS		=	@LIBS@
- 
- INSTALL		=	@INSTALL@
--INSTALL_FILE	=	$(INSTALL) -p    -o root -g root  -m  644
--INSTALL_PROGRAM	=	$(INSTALL) -p    -o root -g root  -m  755
--INSTALL_SCRIPT	=	$(INSTALL) -p    -o root -g root  -m  755
--INSTALL_DIR	=	$(INSTALL) -p -d -o root -g root  -m  755
-+INSTALL_FILE	=	$(INSTALL) -p    -m  644
-+INSTALL_PROGRAM	=	$(INSTALL) -p    -m  755
-+INSTALL_SCRIPT	=	$(INSTALL) -p    -m  755
-+INSTALL_DIR	=	$(INSTALL) -p -d -m  755
- 
- OBJ	=	ltrace.o options.o elf.o output.o read_config_file.o	\
- 		execute_program.o wait_for_something.o process_event.o	\
-@@ -58,7 +58,6 @@
+@@ -61,7 +61,6 @@
  		$(INSTALL_DIR) $(DESTDIR)$(sysconfdir)
  		$(INSTALL_PROGRAM) ltrace $(DESTDIR)$(bindir)
  		$(INSTALL_FILE) etc/ltrace.conf $(DESTDIR)$(sysconfdir)
 -		$(INSTALL_FILE) COPYING README TODO BUGS ChangeLog $(DESTDIR)$(docdir)
  		$(INSTALL_FILE) ltrace.1 $(DESTDIR)$(mandir)/man1
  
- dummy:
+ check:
