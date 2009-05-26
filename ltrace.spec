@@ -5,12 +5,12 @@ Summary(pt_BR.UTF-8):	Mostra informações sobre as chamadas à funções de bib
 Summary(ru.UTF-8):	Выводит трассу библиотечных и системных вызовов программы
 Summary(uk.UTF-8):	Видає трасу бібліотечних та системних викликів програми
 Name:		ltrace
-Version:	0.5
+Version:	0.5.2
 Release:	1
 License:	GPL v2+
 Group:		Development/Debuggers
 Source0:	ftp://ftp.debian.org/debian/pool/main/l/ltrace/%{name}_%{version}.orig.tar.gz
-# Source0-md5:	9b96a0056e9ba88a54e938973bf83025
+# Source0-md5:	02ed50463640af24241567d0145a417f
 Patch0:		%{name}-Makefile.in.patch
 Patch1:		%{name}-debian.patch
 URL:		http://ltrace.alioth.debian.org/
