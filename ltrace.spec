@@ -6,7 +6,7 @@ Summary(ru.UTF-8):	Выводит трассу библиотечных и си�
 Summary(uk.UTF-8):	Видає трасу бібліотечних та системних викликів програми
 Name:		ltrace
 Version:	0.5.2
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Development/Debuggers
 Source0:	ftp://ftp.debian.org/debian/pool/main/l/ltrace/%{name}_%{version}.orig.tar.gz
