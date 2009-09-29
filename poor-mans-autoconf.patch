@@ -13,8 +13,8 @@ http://git.debian.org/?p=collab-maint/ltrace.git;a=commitdiff;h=f670eea50e959eeb
  LDFLAGS		=	@LDFLAGS@
  LIBS		=	@LIBS@
  
---- ltrace-0.5.3/configure~	2009-09-29 18:49:09.000000000 +0300
-+++ ltrace-0.5.3/configure	2009-09-29 18:49:16.363340062 +0300
+--- ltrace-0.5.3/configure	2009-09-29 18:49:16.363340062 +0300
++++ ltrace-0.5.3/configure	2009-09-29 18:52:14.599921203 +0300
 @@ -6,6 +6,12 @@
    exit 1
  fi
@@ -87,3 +87,12 @@ http://git.debian.org/?p=collab-maint/ltrace.git;a=commitdiff;h=f670eea50e959eeb
  
  prefix=/usr/local
  sysconfdir='${prefix}/etc'
+@@ -113,7 +130,7 @@
+ #
+ # Makefile.in -> Makefile
+ #
+-x_subst_vars='PACKAGE_VERSION HOST_OS INSTALL CC CPPFLAGS CFLAGS LDFLAGS LIBS iquote iquoteend prefix sysconfdir mandir docdir'
++x_subst_vars='PACKAGE_VERSION HOST_OS INSTALL CC CPPFLAGS CFLAGS LDFLAGS LIBS iquote iquoteend prefix sysconfdir bindir mandir docdir'
+ 
+ for i in $x_subst_vars
+ do
