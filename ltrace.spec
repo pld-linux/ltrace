@@ -14,6 +14,7 @@ Source0:	ftp://ftp.debian.org/debian/pool/main/l/ltrace/%{name}_%{version}.orig.
 Patch0:		%{name}-Makefile.in.patch
 Patch1:		%{name}-debian.patch
 Patch2:		poor-mans-autoconf.patch
+Patch3:		ptrace-headers.patch
 URL:		http://ltrace.alioth.debian.org/
 BuildRequires:	elfutils-devel
 # for libsupc++ (used for symbols demangling)
@@ -72,6 +73,7 @@ Ltrace - це програма, яка запускає вказану прог�
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 CC="%{__cc}" \
