@@ -5,17 +5,16 @@ Summary(pt_BR.UTF-8):	Mostra informações sobre as chamadas à funções de bib
 Summary(ru.UTF-8):	Выводит трассу библиотечных и системных вызовов программы
 Summary(uk.UTF-8):	Видає трасу бібліотечних та системних викликів програми
 Name:		ltrace
-Version:	0.5.2
-Release:	2
+Version:	0.5.3
+Release:	1
 License:	GPL v2+
 Group:		Development/Debuggers
 Source0:	ftp://ftp.debian.org/debian/pool/main/l/ltrace/%{name}_%{version}.orig.tar.gz
-# Source0-md5:	02ed50463640af24241567d0145a417f
+# Source0-md5:	3fa7fe715ab879db08bd06d1d59fd90f
 Patch0:		%{name}-Makefile.in.patch
 Patch1:		%{name}-debian.patch
+Patch2:		poor-mans-autoconf.patch
 URL:		http://ltrace.alioth.debian.org/
-BuildRequires:	autoconf
-BuildRequires:	automake
 BuildRequires:	elfutils-devel
 # for libsupc++ (used for symbols demangling)
 BuildRequires:	gcc-c++
@@ -72,12 +71,15 @@ Ltrace - це програма, яка запускає вказану прог�
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
-cp -f /usr/share/automake/config.* .
-%{__aclocal}
-%{__autoconf}
-%configure
+CC="%{__cc}" \
+CFLAGS="%{rpmcflags}" \
+./configure \
+	--prefix=%{_prefix} \
+	--sysconfdir=%{_sysconfdir} \
+
 %{__make}
 
 %install

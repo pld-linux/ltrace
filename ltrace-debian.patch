@@ -26,8 +26,8 @@
  			options.output = fopen(optarg, "w");
  			if (!options.output) {
  				fprintf(stderr,
---- ltrace-0.5.orig/ltrace.c
-+++ ltrace-0.5/ltrace.c
+--- ltrace-0.5.orig/libltrace.c
++++ ltrace-0.5/libltrace.c
 @@ -54,6 +54,9 @@
  {
  	exiting = 1;

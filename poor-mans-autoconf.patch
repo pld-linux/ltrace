@@ -1,0 +1,89 @@
+yay for Juan Cespedes for killing autoconf, making configure no longer portable
+
+http://git.debian.org/?p=collab-maint/ltrace.git;a=commitdiff;h=f670eea50e959eeb9da53d70cad8d43c19494ef0
+
+--- ltrace-0.5.3/Makefile.in~	2009-09-29 18:22:49.000000000 +0300
++++ ltrace-0.5.3/Makefile.in	2009-09-29 18:40:52.608084066 +0300
+@@ -15,7 +15,7 @@
+ 
+ CC		=	@CC@
+ CFLAGS		=	-Wall @CFLAGS@
+-CPPFLAGS	=	-iquote $(TOPDIR) -iquote $(TOPDIR)/sysdeps/$(OS) -DSYSCONFDIR=\"$(sysconfdir)\" @CPPFLAGS@
++CPPFLAGS	=	@iquote@$(TOPDIR) @iquote@$(TOPDIR)/sysdeps/$(OS) @iquoteend@ -DSYSCONFDIR=\"$(sysconfdir)\" @CPPFLAGS@
+ LDFLAGS		=	@LDFLAGS@
+ LIBS		=	@LIBS@
+ 
+--- ltrace-0.5.3/configure~	2009-09-29 18:49:09.000000000 +0300
++++ ltrace-0.5.3/configure	2009-09-29 18:49:16.363340062 +0300
+@@ -6,6 +6,12 @@
+   exit 1
+ fi
+ 
++CC=${CC:-gcc}
++CPPFLAGS=' -I /usr/include/libelf'
++CFLAGS=${CFLAGS:-'-g -O2'}
++LIBS='-lelf -lsupc++ -liberty '
++INSTALL='/usr/bin/install -c'
++
+ echo -n "checking package name... "
+ PACKAGE_NAME='ltrace'
+ echo $PACKAGE_NAME
+@@ -30,7 +36,7 @@
+   return cplus_demangle();
+ }
+ EOF
+-if gcc conftest.c -liberty 2>/dev/null
++if $CC $CFLAGS conftest.c -liberty 2>/dev/null
+ then
+   HAVE_LIBIBERTY=1
+   echo "yes"
+@@ -48,7 +54,7 @@
+   return __cxa_demangle();
+ }
+ EOF
+-if gcc conftest.c -lsupc++ 2>/dev/null
++if $CC $CFLAGS conftest.c -lsupc++ 2>/dev/null
+ then
+   HAVE_LIBSUPC__=1
+   echo "yes"
+@@ -67,7 +73,7 @@
+   return 0;
+ }
+ EOF
+-if gcc conftest.c 2>/dev/null
++if $CC $CFLAGS conftest.c 2>/dev/null
+ then
+   HAVE_ELF_C_READ_MMAP=1
+   echo "yes"
+@@ -77,13 +83,24 @@
+ fi
+ rm -f conftest.c a.out
+ 
+-CC=gcc
+-CPPFLAGS=' -I /usr/include/libelf'
+-CFLAGS='-g -O2'
+-LIBS='-lelf -lsupc++ -liberty '
+-INSTALL='/usr/bin/install -c'
+-iquote='-iquote '
+-iquoteend=''
++# -iquote
++echo -n "checking whether compiler accepts -iquote dir... "
++cat > conftest.c << EOF
++int main () {
++  return 0;
++}
++EOF
++if $CC $CFLAGS -iquote . conftest.c 2>/dev/null
++then
++  iquote="-iquote "
++  iquoteend=""
++  echo "yes"
++else
++  iquote="-I "
++  iquoteend="-I-"
++  echo "no"
++fi
++rm -f conftest.c a.out
+ 
+ prefix=/usr/local
+ sysconfdir='${prefix}/etc'
