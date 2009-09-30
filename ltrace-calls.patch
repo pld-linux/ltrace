@@ -1,0 +1,59 @@
+--- ltrace-0.5.3/etc/ltrace.conf.orig	2009-07-25 17:13:02.000000000 +0200
++++ ltrace-0.5.3/etc/ltrace.conf	2009-09-30 17:12:53.650843495 +0200
+@@ -107,6 +107,9 @@
+ addr bfd_openr(string,string);
+ int bfd_check_format(addr,int);
+ 
++; crypt.h
++string crypt_r(string,string,addr);
++
+ ; ctype.h
+ char tolower(char);
+ char toupper(char);
+@@ -258,6 +261,8 @@
+ int sigsuspend(addr);
+ 
+ ; stdio.h
++int __printf_chk(int,format);
++int __sprintf_chk(+string,int,ulong,format);
+ int fclose(file);
+ int feof(file);
+ int ferror(file);
+@@ -272,6 +277,10 @@
+ int fputs(string,file);
+ ulong fread(addr,ulong,ulong,file);
+ ulong fread_unlocked(addr,ulong,ulong,file);
++long fseeko(file,long,int);
++long fseeko64(file,long,int);
++long ftello(file);
++long ftello64(file);
+ ulong fwrite(string,ulong,ulong,file);
+ ulong fwrite_unlocked(string,ulong,ulong,file);
+ int pclose(addr);
+@@ -311,6 +320,8 @@
+ int system(string);
+ 
+ ; string.h
++string __strcpy_chk(+string,string,ulong);
++addr __strdup(string);
+ void bcopy(addr,addr,ulong);
+ void bzero(addr,ulong);
+ string basename(string);
+@@ -329,6 +340,7 @@
+ addr strcpy(addr,string);
+ addr strdup(string);
+ string strerror(int);
++int strncasecmp(string,string,ulong);
+ int strncmp(string,string,ulong);
+ addr strncpy(addr,string3,ulong);
+ string strrchr(string,char);
+@@ -442,6 +454,9 @@
+ ; wchar.h
+ int fwide(addr, int);
+ 
++; zio.h
++file fzopen(string,string);
++
+ ; sys/wait.h
+ int wait(addr);
+ int waitpid(int,addr,int);
