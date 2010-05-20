@@ -17,6 +17,7 @@ Patch2:		poor-mans-autoconf.patch
 Patch3:		ptrace-headers.patch
 Patch4:		%{name}-calls.patch
 URL:		http://ltrace.alioth.debian.org/
+BuildRequires:	binutils-devel
 BuildRequires:	elfutils-devel
 # for libsupc++ (used for symbols demangling)
 BuildRequires:	gcc-c++
