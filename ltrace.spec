@@ -5,23 +5,21 @@ Summary(pt_BR.UTF-8):	Mostra informações sobre as chamadas à funções de bib
 Summary(ru.UTF-8):	Выводит трассу библиотечных и системных вызовов программы
 Summary(uk.UTF-8):	Видає трасу бібліотечних та системних викликів програми
 Name:		ltrace
-Version:	0.5.3
+Version:	0.7.3
 Release:	1
 License:	GPL v2+
 Group:		Development/Debuggers
-Source0:	ftp://ftp.debian.org/debian/pool/main/l/ltrace/%{name}_%{version}.orig.tar.gz
-# Source0-md5:	3fa7fe715ab879db08bd06d1d59fd90f
-Patch0:		%{name}-Makefile.in.patch
-Patch1:		%{name}-debian.patch
-Patch2:		poor-mans-autoconf.patch
-Patch3:		ptrace-headers.patch
-Patch4:		%{name}-calls.patch
+Source0:	ftp://ftp.debian.org/debian/pool/main/l/ltrace/%{name}_%{version}.orig.tar.bz2
+# Source0-md5:	b3dd199af8f18637f7d4ef97fdfb9d14
+Patch0:		%{name}-calls.patch
 URL:		http://ltrace.alioth.debian.org/
 BuildRequires:	binutils-devel
 BuildRequires:	elfutils-devel
 # for libsupc++ (used for symbols demangling)
 BuildRequires:	gcc-c++
-ExclusiveArch:	alpha armv4b armv4l %{ix86} ia64 m68k ppc s390 sparc %{x8664}
+BuildRequires:	libselinux-devel
+BuildRequires:	libunwind-devel
+ExclusiveArch:	alpha armv4b armv4l %{ix86} ia64 m68k mips ppc ppc64 s390 s390x sparc sparcv9 sparc64 %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -73,17 +71,9 @@ Ltrace - це програма, яка запускає вказану прог�
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
 
 %build
-CC="%{__cc}" \
-CFLAGS="%{rpmcflags}" \
-./configure \
-	--prefix=%{_prefix} \
-	--sysconfdir=%{_sysconfdir} \
+%configure
 
 %{__make}
 
@@ -98,7 +88,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc BUGS ChangeLog README TODO
+%doc CREDITS NEWS README TODO
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/ltrace.conf
 %attr(755,root,root) %{_bindir}/ltrace
-%{_mandir}/man1/*
+%{_mandir}/man1/ltrace.1*
+%{_mandir}/man5/ltrace.conf.5*
