@@ -6,12 +6,13 @@ Summary(ru.UTF-8):	Выводит трассу библиотечных и си�
 Summary(uk.UTF-8):	Видає трасу бібліотечних та системних викликів програми
 Name:		ltrace
 Version:	0.7.3
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Development/Debuggers
 Source0:	ftp://ftp.debian.org/debian/pool/main/l/ltrace/%{name}_%{version}.orig.tar.bz2
 # Source0-md5:	b3dd199af8f18637f7d4ef97fdfb9d14
 Patch0:		%{name}-calls.patch
+Patch1:		%{name}-assert.patch
 URL:		http://ltrace.alioth.debian.org/
 BuildRequires:	binutils-devel
 BuildRequires:	elfutils-devel
@@ -71,6 +72,7 @@ Ltrace - це програма, яка запускає вказану прог�
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %configure
