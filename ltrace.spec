@@ -9,7 +9,7 @@ Version:	0.7.3
 Release:	2
 License:	GPL v2+
 Group:		Development/Debuggers
-Source0:	ftp://ftp.debian.org/debian/pool/main/l/ltrace/%{name}_%{version}.orig.tar.bz2
+Source0:	http://ftp.debian.org/debian/pool/main/l/ltrace/%{name}_%{version}.orig.tar.bz2
 # Source0-md5:	b3dd199af8f18637f7d4ef97fdfb9d14
 Patch0:		%{name}-calls.patch
 Patch1:		%{name}-assert.patch
