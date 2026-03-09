@@ -1,0 +1,11 @@
+--- ltrace-0.7.3/ltrace-elf.c.orig	2026-03-09 17:20:41.146358381 +0100
++++ ltrace-0.7.3/ltrace-elf.c	2026-03-09 17:20:41.193416514 +0100
+@@ -218,7 +218,7 @@
+ 	int								\
+ 	NAME(Elf_Data *data, GElf_Xword offset, uint##SIZE##_t *retp)	\
+ 	{								\
+-		if (!need_data(data, offset, SIZE / 8) < 0)		\
++		if (need_data(data, offset, SIZE / 8) < 0)		\
+ 			return -1;					\
+ 									\
+ 		if (data->d_buf == NULL) /* NODATA section */ {		\
