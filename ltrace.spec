@@ -5,22 +5,21 @@ Summary(pt_BR.UTF-8):	Mostra informações sobre as chamadas à funções de bib
 Summary(ru.UTF-8):	Выводит трассу библиотечных и системных вызовов программы
 Summary(uk.UTF-8):	Видає трасу бібліотечних та системних викликів програми
 Name:		ltrace
-Version:	0.7.3
-Release:	4
+Version:	0.8.1
+Release:	1
 License:	GPL v2+
 Group:		Development/Debuggers
-Source0:	https://ftp.debian.org/debian/pool/main/l/ltrace/%{name}_%{version}.orig.tar.bz2
-# Source0-md5:	b3dd199af8f18637f7d4ef97fdfb9d14
-Patch0:		%{name}-calls.patch
-Patch1:		%{name}-assert.patch
-# Fix !need_data() logic bug (always-false condition due to operator precedence)
-Patch2:		%{name}-need_data-fix.patch
-URL:		https://ltrace.org/
+Source0:	https://gitlab.com/cespedes/ltrace/-/archive/%{version}/%{name}-%{version}.tar.bz2
+# Source0-md5:	cb3153a6e7a660da41250d770118567c
+URL:		https://gitlab.com/cespedes/ltrace
+BuildRequires:	autoconf >= 2.65
+BuildRequires:	automake
 BuildRequires:	binutils-devel
 BuildRequires:	elfutils-devel
 # for libsupc++ (used for symbols demangling)
 BuildRequires:	gcc-c++
 BuildRequires:	libselinux-devel
+BuildRequires:	libtool
 BuildRequires:	libunwind-devel
 ExclusiveArch:	alpha armv4b armv4l %{ix86} ia64 m68k mips ppc ppc64 s390 s390x sparc sparcv9 sparc64 %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -73,13 +72,17 @@ Ltrace - це програма, яка запускає вказану прог�
 
 %prep
 %setup -q
-%patch -P0 -p1
-%patch -P1 -p1
-%patch -P2 -p1
 
 %build
+%{__libtoolize}
+%{__aclocal} -I config/m4
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+# upstream refuses to pick one unwinder when both are installed
 %configure \
-	--disable-werror
+	--without-elfutils \
+	--with-libunwind
 
 %{__make}
 
@@ -89,13 +92,16 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+# packaged as %doc
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/%{name}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
 %doc CREDITS NEWS README TODO
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/ltrace.conf
 %attr(755,root,root) %{_bindir}/ltrace
+%{_datadir}/%{name}
 %{_mandir}/man1/ltrace.1*
 %{_mandir}/man5/ltrace.conf.5*
