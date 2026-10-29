@@ -19,10 +19,13 @@ BuildRequires:	elfutils-devel
 # for libsupc++ (used for symbols demangling)
 BuildRequires:	gcc-c++
 BuildRequires:	libselinux-devel
-BuildRequires:	libtool
+BuildRequires:	libtool >= 2:2
 BuildRequires:	libunwind-devel
-ExclusiveArch:	alpha armv4b armv4l %{ix86} ia64 m68k mips ppc ppc64 s390 s390x sparc sparcv9 sparc64 %{x8664}
+ExclusiveArch:	aarch64 alpha %{arm} cris ia64 loongarch64 m68k metag mips ppc ppc64 riscv64 s390 s390x sparc sparcv9 sparc64 %{ix86} %{x8664} xtensa
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+# uses asserts for sanity checks
+%define		filterout_cpp	-DNDEBUG
 
 %description
 Ltrace is a debugging program which runs a specified command until the
